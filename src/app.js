@@ -1,4 +1,4 @@
-import logger from './logger';
+import $ from 'jquery';
+import * as giveMeFive from './giveMeFive';
 
-logger(); // yes
-console.log('app loaded');
+giveMeFive.init();

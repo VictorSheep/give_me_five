@@ -1,9 +1,46 @@
-a{
-	text-align: center;
-	font-size: 1.5em;
+/***********/
+/* Général */
+body{
+	background-image: url('../img/square_wallpaper.png');
+	background-size: 120px 60px;
+	overflow: hidden;
 }
-a>img{
-	width:100%;
+a:hover{
+	text-decoration: none;
+}
+
+/**************************/
+/*Classe pour js dynamique*/
+.disabled{
+	display: none;
+}
+
+/********/
+/* Home */
+#home .button{
+	display: inline-block;
+	width:20%;
+	margin: 0 6.45%;
+	text-align: center;
+	font-size: 2em;
+	cursor: pointer;
+}
+#home .button>img{
+	width:98%;
 	border: 2px solid #fff;
 	border-radius: 10px;
 }
+#home .title{
+	line-height: 4.5em;
+	text-align: center;
+	font-size: 6em;	
+}
+
+/************/
+/* Students */
+
+/********/
+/* Rank */
+
+/********/
+/* Roll */
