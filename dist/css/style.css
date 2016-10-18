@@ -8,7 +8,35 @@ body{
 a:hover{
 	text-decoration: none;
 }
-
+input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 2em;
+}
+/*hauteur*/
+.h_30  { height:  30px  ; }
+.h_50  { height:  50px  ; }
+.h_100 { height: 100px  ; }
+.h_200 { height: 200px  ; }
+.h_300 { height: 300px  ; }
+.h_400 { height: 400px  ; }
+/*padding haut et bas
+.v_pad_20 { padding : 20px  auto; }
+.v_pad_30 { padding : 30px  auto; }
+.v_pad_45 { padding : 45px  auto; }
+.v_pad_60 { padding : 60px  auto; }
+.v_pad_100{ padding : 100px auto; }
+.v_pad_200{ padding : 200px auto; }
+.v_pad_300{ padding : 300px auto; }
+/*padding gauche et droite
+.h_pad_20 { padding : auto 20px ; }
+.h_pad_30 { padding : auto 30px ; }
+.h_pad_45 { padding : auto 45px ; }
+.h_pad_60 { padding : auto 60px ; }
+.h_pad_100{ padding : auto 100px; }
+.h_pad_200{ padding : auto 200px; }
+.h_pad_300{ padding : auto 300px; }
+*/
 /**************************/
 /*Classe pour js dynamique*/
 .disabled{
@@ -44,3 +72,6 @@ a:hover{
 
 /********/
 /* Roll */
+#roll p{
+	font-size: 1.8em;
+}

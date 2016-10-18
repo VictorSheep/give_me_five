@@ -72,28 +72,22 @@
 	});
 	exports.init = undefined;
 
-	var _student = __webpack_require__(3);
-
-	var _student2 = _interopRequireDefault(_student);
-
-	var _btnNav = __webpack_require__(6);
-
-	var _btnNav2 = _interopRequireDefault(_btnNav);
-
 	var _homePage = __webpack_require__(7);
 
 	var homePage = _interopRequireWildcard(_homePage);
 
+	var _data = __webpack_require__(8);
+
+	var data = _interopRequireWildcard(_data);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	console.log(data);
 
 	function init() {
 		// Création de tous les étudiants
-		var STUDENTS = [new _student2.default('Mathieu', 'Vandeville'), new _student2.default('Joel', 'Alves Canteiro')];
-		var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
 
-		homePage.init(BTNNAVS);
+		homePage.init(data.BTNNAVS);
 		//rollPage.init(BTNNAVS, STUDENTS);
 		//rankPage.init(BTNNAVS, STUDENTS);
 		//studentsPage.init(BTNNAVS, STUDENTS);
@@ -10406,6 +10400,34 @@
 	}
 
 	exports.init = init;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.BTNNAVS = exports.STUDENTS = undefined;
+
+	var _student = __webpack_require__(3);
+
+	var _student2 = _interopRequireDefault(_student);
+
+	var _btnNav = __webpack_require__(6);
+
+	var _btnNav2 = _interopRequireDefault(_btnNav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville'), new _student2.default('Joel', 'Alves Canteiro')];
+
+	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
+
+	exports.STUDENTS = STUDENTS;
+	exports.BTNNAVS = BTNNAVS;
 
 /***/ }
 /******/ ]);
