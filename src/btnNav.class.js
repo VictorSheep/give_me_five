@@ -1,6 +1,6 @@
 export default class{
-	constructor(name,icon){
+	constructor(name,iconPath){
 		this.name = name;
-		this.icon = icon;
+		this.iconPath = iconPath;
 	}
 }

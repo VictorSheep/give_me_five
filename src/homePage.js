@@ -8,7 +8,7 @@ function init(table){
 		let b = table[i];
 
 		$divButton.attr('title',b.firstname);
-		$divButton.find('img').attr('src',b.icon);
+		$divButton.find('img').attr('src',b.iconPath);
 		$divButton.find('p').empty();
 		$divButton.find('p').text(b.name);
 		$divButton.appendTo('#home .buttons');

@@ -4,7 +4,7 @@ import BtnNav from './btnNav.class';
 // Création de tous les étudiants
 let STUDENTS = [
   new Student('Mathieu','Vandeville'),
-  new Student('Clément','Teboule'),
+  new Student('Clément','Teboule','img/clementteboul.JPG'),
   new Student('Victor','Moutton'),
   new Student('Félix','Nahon'),
   new Student('Clément','Dussol'),

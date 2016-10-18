@@ -79,6 +79,10 @@
 
 	var rollPage = _interopRequireWildcard(_rollPage);
 
+	var _studentsPage = __webpack_require__(9);
+
+	var studentsPage = _interopRequireWildcard(_studentsPage);
+
 	var _data = __webpack_require__(3);
 
 	var data = _interopRequireWildcard(_data);
@@ -86,11 +90,10 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function init() {
-
 		homePage.init(data.BTNNAVS);
 		rollPage.init(data.STUDENTS);
+		studentsPage.init(data.STUDENTS);
 		//rankPage.init(BTNNAVS, STUDENTS);
-		//studentsPage.init(BTNNAVS, STUDENTS);
 	}
 
 	exports.init = init;
@@ -120,7 +123,7 @@
 			var b = table[i];
 
 			$divButton.attr('title', b.firstname);
-			$divButton.find('img').attr('src', b.icon);
+			$divButton.find('img').attr('src', b.iconPath);
 			$divButton.find('p').empty();
 			$divButton.find('p').text(b.name);
 			$divButton.appendTo('#home .buttons');
@@ -152,7 +155,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Création de tous les étudiants
-	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville'), new _student2.default('Clément', 'Teboule'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
+	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville'), new _student2.default('Clément', 'Teboule', 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
 
 	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
 
@@ -163,7 +166,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -171,12 +174,13 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var _class = function _class(firstname, lastname) {
+	var _class = function _class(firstname, lastname, profilImagePath) {
 		_classCallCheck(this, _class);
 
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.score = 0;
+		this.profilImagePath = profilImagePath || 'img/eleves.jpg';
 	};
 
 	exports.default = _class;
@@ -193,11 +197,11 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var _class = function _class(name, icon) {
+	var _class = function _class(name, iconPath) {
 		_classCallCheck(this, _class);
 
 		this.name = name;
-		this.icon = icon;
+		this.iconPath = iconPath;
 	};
 
 	exports.default = _class;
@@ -10463,6 +10467,46 @@
 	return jQuery;
 	} );
 
+
+/***/ },
+/* 8 */,
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.init = undefined;
+
+	var _jquery = __webpack_require__(7);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init(table) {
+
+	  var $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').detach(); // clone + remove
+
+	  console.log($divStudent);
+
+	  for (var i = 0; i < table.length; i++) {
+	    var s = table[i];
+
+	    $divStudent.attr('title', s.firstname);
+	    $divStudent.find('.profil_image').css('background-image', 'url(../' + s.profilImagePath + ')');
+	    $divStudent.find('p').eq(0).empty;
+	    $divStudent.find('p').eq(0).text(s.lastname + ' ' + s.firstname);
+	    $divStudent.find('p').eq(1).empty;
+	    $divStudent.find('p').eq(1).text(s.score);
+	    $divStudent.appendTo('#students .list_profil_card');
+	    $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').clone();
+	  }
+	}
+
+	exports.init = init;
 
 /***/ }
 /******/ ]);
