@@ -4,14 +4,13 @@ function init(table){
 
 	let $divButton = $('#home .button:first').detach(); // clone + remove
 
-	console.log($divButton);
-
 	for (var i = 0; i < table.length; i++) {
-		console.log(i);
-		$divButton.attr('title',table[i].name);
-		$divButton.find('img').attr('src',table[i].icon);
+		let b = table[i];
+
+		$divButton.attr('title',b.firstname);
+		$divButton.find('img').attr('src',b.icon);
 		$divButton.find('p').empty();
-		$divButton.find('p').text(table[i].name);
+		$divButton.find('p').text(b.name);
 		$divButton.appendTo('#home .buttons');
 		$divButton = $('#home .button:first').clone();
 	}

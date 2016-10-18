@@ -1,14 +1,12 @@
 import * as homePage from './homePage';
+import * as rollPage from './rollPage';
 import * as data from './data';
-
-console.log(data);
 
 function init()
 {
-	// Création de tous les étudiants
 
 	homePage.init(data.BTNNAVS);
-	//rollPage.init(BTNNAVS, STUDENTS);
+	rollPage.init(data.STUDENTS);
 	//rankPage.init(BTNNAVS, STUDENTS);
 	//studentsPage.init(BTNNAVS, STUDENTS);
 }

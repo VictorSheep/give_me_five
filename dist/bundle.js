@@ -46,11 +46,11 @@
 
 	'use strict';
 
-	var _jquery = __webpack_require__(4);
+	var _jquery = __webpack_require__(7);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _giveMeFive = __webpack_require__(2);
+	var _giveMeFive = __webpack_require__(1);
 
 	var giveMeFive = _interopRequireWildcard(_giveMeFive);
 
@@ -61,7 +61,41 @@
 	giveMeFive.init();
 
 /***/ },
-/* 1 */,
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.init = undefined;
+
+	var _homePage = __webpack_require__(2);
+
+	var homePage = _interopRequireWildcard(_homePage);
+
+	var _rollPage = __webpack_require__(6);
+
+	var rollPage = _interopRequireWildcard(_rollPage);
+
+	var _data = __webpack_require__(3);
+
+	var data = _interopRequireWildcard(_data);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function init() {
+
+		homePage.init(data.BTNNAVS);
+		rollPage.init(data.STUDENTS);
+		//rankPage.init(BTNNAVS, STUDENTS);
+		//studentsPage.init(BTNNAVS, STUDENTS);
+	}
+
+	exports.init = init;
+
+/***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -72,31 +106,61 @@
 	});
 	exports.init = undefined;
 
-	var _homePage = __webpack_require__(7);
+	var _jquery = __webpack_require__(7);
 
-	var homePage = _interopRequireWildcard(_homePage);
+	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _data = __webpack_require__(8);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var data = _interopRequireWildcard(_data);
+	function init(table) {
 
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+		var $divButton = (0, _jquery2.default)('#home .button:first').detach(); // clone + remove
 
-	console.log(data);
+		for (var i = 0; i < table.length; i++) {
+			var b = table[i];
 
-	function init() {
-		// Création de tous les étudiants
-
-		homePage.init(data.BTNNAVS);
-		//rollPage.init(BTNNAVS, STUDENTS);
-		//rankPage.init(BTNNAVS, STUDENTS);
-		//studentsPage.init(BTNNAVS, STUDENTS);
+			$divButton.attr('title', b.firstname);
+			$divButton.find('img').attr('src', b.icon);
+			$divButton.find('p').empty();
+			$divButton.find('p').text(b.name);
+			$divButton.appendTo('#home .buttons');
+			$divButton = (0, _jquery2.default)('#home .button:first').clone();
+		}
 	}
 
 	exports.init = init;
 
 /***/ },
 /* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.BTNNAVS = exports.STUDENTS = undefined;
+
+	var _student = __webpack_require__(4);
+
+	var _student2 = _interopRequireDefault(_student);
+
+	var _btnNav = __webpack_require__(5);
+
+	var _btnNav2 = _interopRequireDefault(_btnNav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Création de tous les étudiants
+	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville'), new _student2.default('Clément', 'Teboule'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
+
+	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
+
+	exports.STUDENTS = STUDENTS;
+	exports.BTNNAVS = BTNNAVS;
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -118,7 +182,64 @@
 	exports.default = _class;
 
 /***/ },
-/* 4 */
+/* 5 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _class = function _class(name, icon) {
+		_classCallCheck(this, _class);
+
+		this.name = name;
+		this.icon = icon;
+	};
+
+	exports.default = _class;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.init = undefined;
+
+	var _jquery = __webpack_require__(7);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init(table) {
+
+	  var $trStudent = (0, _jquery2.default)('#roll td:first').parent().detach(); // clone + remove
+
+	  for (var i = 0; i < table.length; i++) {
+	    var s = table[i];
+
+	    $trStudent.attr('title', s.firstname);
+	    $trStudent.children().eq(0).empty();
+	    $trStudent.children().eq(0).text(table[i].lastname);
+	    $trStudent.children().eq(1).empty();
+	    $trStudent.children().eq(1).text(table[i].firstname);
+	    $trStudent.appendTo('#roll tbody');
+	    $trStudent = (0, _jquery2.default)('#roll td:first').parent().clone();
+	  }
+	}
+
+	exports.init = init;
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10342,92 +10463,6 @@
 	return jQuery;
 	} );
 
-
-/***/ },
-/* 5 */,
-/* 6 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var _class = function _class(name, icon) {
-		_classCallCheck(this, _class);
-
-		this.name = name;
-		this.icon = icon;
-	};
-
-	exports.default = _class;
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.init = undefined;
-
-	var _jquery = __webpack_require__(4);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function init(table) {
-
-		var $divButton = (0, _jquery2.default)('#home .button:first').detach(); // clone + remove
-
-		console.log($divButton);
-
-		for (var i = 0; i < table.length; i++) {
-			console.log(i);
-			$divButton.attr('title', table[i].name);
-			$divButton.find('img').attr('src', table[i].icon);
-			$divButton.find('p').empty();
-			$divButton.find('p').text(table[i].name);
-			$divButton.appendTo('#home .buttons');
-			$divButton = (0, _jquery2.default)('#home .button:first').clone();
-		}
-	}
-
-	exports.init = init;
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.BTNNAVS = exports.STUDENTS = undefined;
-
-	var _student = __webpack_require__(3);
-
-	var _student2 = _interopRequireDefault(_student);
-
-	var _btnNav = __webpack_require__(6);
-
-	var _btnNav2 = _interopRequireDefault(_btnNav);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville'), new _student2.default('Joel', 'Alves Canteiro')];
-
-	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
-
-	exports.STUDENTS = STUDENTS;
-	exports.BTNNAVS = BTNNAVS;
 
 /***/ }
 /******/ ]);
