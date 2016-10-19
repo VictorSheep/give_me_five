@@ -7,6 +7,7 @@ function init(){
   dispFeatures();
   clkOnProfilCardMin();
   clkOnIncreaseItem();
+  clkOnDecreaseItem();
 }
 
 function dispCardMin(){
@@ -72,8 +73,26 @@ function dispFeatures(){
 function clkOnIncreaseItem(){
   $('#students #increase').children().mousedown(function(){
     let profilId = $('#students .flag').attr('id');
+    let featurID = this.id;
     let s = STUDENTS[profilId];
+    let f = FEATURES[featurID];
+    f.addPoint(s);
 
+    affStudentDetail(profilId);
+
+  });
+}
+
+function clkOnDecreaseItem(){
+  $('#students #decrease').children().mousedown(function(){
+    let profilId = $('#students .flag').attr('id');
+    let featurID = this.id;
+    let s = STUDENTS[profilId];
+    let f = FEATURES[featurID];
+    f.removePoint(s);
+
+    affStudentDetail(profilId);
+    
   });
 }
 

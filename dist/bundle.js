@@ -10549,6 +10549,7 @@
 	  dispFeatures();
 	  clkOnProfilCardMin();
 	  clkOnIncreaseItem();
+	  clkOnDecreaseItem();
 	}
 
 	function dispCardMin() {
@@ -10614,7 +10615,24 @@
 	function clkOnIncreaseItem() {
 	  (0, _jquery2.default)('#students #increase').children().mousedown(function () {
 	    var profilId = (0, _jquery2.default)('#students .flag').attr('id');
+	    var featurID = this.id;
 	    var s = _data.STUDENTS[profilId];
+	    var f = _data.FEATURES[featurID];
+	    f.addPoint(s);
+
+	    affStudentDetail(profilId);
+	  });
+	}
+
+	function clkOnDecreaseItem() {
+	  (0, _jquery2.default)('#students #decrease').children().mousedown(function () {
+	    var profilId = (0, _jquery2.default)('#students .flag').attr('id');
+	    var featurID = this.id;
+	    var s = _data.STUDENTS[profilId];
+	    var f = _data.FEATURES[featurID];
+	    f.removePoint(s);
+
+	    affStudentDetail(profilId);
 	  });
 	}
 
