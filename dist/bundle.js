@@ -10328,12 +10328,10 @@
 	  for (var i = data.STUDENTS.length - 1; i >= 0; i--) {
 	    var s = data.STUDENTS[i];
 	    s.init(i);
-
-	    console.log(s.id);
 	  }
 	  homePage.init(data.BTNNAVS);
 	  rollPage.init(data.STUDENTS);
-	  studentsPage.init(data.STUDENTS);
+	  studentsPage.init();
 	  rankPage.init(data.STUDENTS);
 	  menu.init(data.BTNNAVS);
 	}
@@ -10619,6 +10617,7 @@
 	    var s = _data.STUDENTS[profilId];
 	    var f = _data.FEATURES[featurID];
 	    f.addPoint(s);
+	    s.updateScore();
 
 	    affStudentDetail(profilId);
 	  });
@@ -10631,6 +10630,7 @@
 	    var s = _data.STUDENTS[profilId];
 	    var f = _data.FEATURES[featurID];
 	    f.removePoint(s);
+	    s.updateScore();
 
 	    affStudentDetail(profilId);
 	  });
@@ -10731,7 +10731,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10739,30 +10739,45 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var _class = function () {
-	  function _class(firstname, lastname, score, profilImagePath) {
-	    _classCallCheck(this, _class);
+	    function _class(firstname, lastname, score, profilImagePath) {
+	        _classCallCheck(this, _class);
 
-	    this.id = null;
-	    this.firstname = firstname;
-	    this.lastname = lastname;
-	    this.profilImagePath = profilImagePath || 'img/eleves.jpg';
+	        this.id = null;
+	        this.firstname = firstname;
+	        this.lastname = lastname;
+	        this.profilImagePath = profilImagePath || 'img/eleves.jpg';
 
-	    this.attendance = 0; // nb présence
-	    this.lateness = 0; // nb retard
-	    this.absence = 0; // nb absence
-	    this.contribution = 0; // nb contribution
-	    this.tablePassage = 0; // score passage au tableau
-	    this.score = 0; // score total
-	  }
-
-	  _createClass(_class, [{
-	    key: 'init',
-	    value: function init(id) {
-	      this.id = id;
+	        this.attendance = 0; // nb présence
+	        this.lateness = 0; // nb retard
+	        this.absence = 0; // nb absence
+	        this.contribution = 0; // nb contribution
+	        this.tablePassage = 0; // score passage au tableau
+	        this.score = 0; // score total
 	    }
-	  }]);
 
-	  return _class;
+	    _createClass(_class, [{
+	        key: 'init',
+	        value: function init(id) {
+	            this.id = id;
+	        }
+	    }, {
+	        key: 'updateScore',
+	        value: function updateScore() {
+	            var s = 0;
+
+	            s += this.attendance * 10;
+	            s += this.lateness * -2;
+	            s += this.absence * -10;
+	            s += this.contribution * 2;
+	            s += this.tablePassage * 5;
+
+	            if (s < 0) s = 0;
+
+	            this.score = s;
+	        }
+	    }]);
+
+	    return _class;
 	}();
 
 	exports.default = _class;

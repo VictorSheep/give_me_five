@@ -11,12 +11,10 @@ function init()
   for (var i = data.STUDENTS.length-1; i>=0; i--) {
     let s = data.STUDENTS[i];
     s.init(i);
-
-    console.log(s.id);
   }
 	homePage.init(data.BTNNAVS);
 	rollPage.init(data.STUDENTS);
-	studentsPage.init(data.STUDENTS);
+	studentsPage.init();
   rankPage.init(data.STUDENTS);
   menu.init(data.BTNNAVS);
 }

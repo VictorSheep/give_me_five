@@ -77,9 +77,9 @@ function clkOnIncreaseItem(){
     let s = STUDENTS[profilId];
     let f = FEATURES[featurID];
     f.addPoint(s);
-
+    s.updateScore();
+    
     affStudentDetail(profilId);
-
   });
 }
 
@@ -90,9 +90,9 @@ function clkOnDecreaseItem(){
     let s = STUDENTS[profilId];
     let f = FEATURES[featurID];
     f.removePoint(s);
+    s.updateScore();
 
     affStudentDetail(profilId);
-    
   });
 }
 
@@ -100,7 +100,6 @@ function clkOnProfilCardMin(){
   $('#students .profil_card_min').mousedown(function(){
     let profilId = this.id;
     affStudentDetail(profilId);
-    
   });
 }
 
