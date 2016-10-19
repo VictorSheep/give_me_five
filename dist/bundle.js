@@ -46,11 +46,11 @@
 
 	'use strict';
 
-	var _jquery = __webpack_require__(7);
+	var _jquery = __webpack_require__(1);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _giveMeFive = __webpack_require__(1);
+	var _giveMeFive = __webpack_require__(2);
 
 	var giveMeFive = _interopRequireWildcard(_giveMeFive);
 
@@ -62,188 +62,6 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.init = undefined;
-
-	var _homePage = __webpack_require__(2);
-
-	var homePage = _interopRequireWildcard(_homePage);
-
-	var _rollPage = __webpack_require__(6);
-
-	var rollPage = _interopRequireWildcard(_rollPage);
-
-	var _studentsPage = __webpack_require__(9);
-
-	var studentsPage = _interopRequireWildcard(_studentsPage);
-
-	var _data = __webpack_require__(3);
-
-	var data = _interopRequireWildcard(_data);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function init() {
-		homePage.init(data.BTNNAVS);
-		rollPage.init(data.STUDENTS);
-		studentsPage.init(data.STUDENTS);
-		//rankPage.init(BTNNAVS, STUDENTS);
-	}
-
-	exports.init = init;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.init = undefined;
-
-	var _jquery = __webpack_require__(7);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function init(table) {
-
-		var $divButton = (0, _jquery2.default)('#home .button:first').detach(); // clone + remove
-
-		for (var i = 0; i < table.length; i++) {
-			var b = table[i];
-
-			$divButton.attr('title', b.firstname);
-			$divButton.find('img').attr('src', b.iconPath);
-			$divButton.find('p').empty();
-			$divButton.find('p').text(b.name);
-			$divButton.appendTo('#home .buttons');
-			$divButton = (0, _jquery2.default)('#home .button:first').clone();
-		}
-	}
-
-	exports.init = init;
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.BTNNAVS = exports.STUDENTS = undefined;
-
-	var _student = __webpack_require__(4);
-
-	var _student2 = _interopRequireDefault(_student);
-
-	var _btnNav = __webpack_require__(5);
-
-	var _btnNav2 = _interopRequireDefault(_btnNav);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// Création de tous les étudiants
-	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville'), new _student2.default('Clément', 'Teboule', 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
-
-	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
-
-	exports.STUDENTS = STUDENTS;
-	exports.BTNNAVS = BTNNAVS;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var _class = function _class(firstname, lastname, profilImagePath) {
-		_classCallCheck(this, _class);
-
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.score = 0;
-		this.profilImagePath = profilImagePath || 'img/eleves.jpg';
-	};
-
-	exports.default = _class;
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var _class = function _class(name, iconPath) {
-		_classCallCheck(this, _class);
-
-		this.name = name;
-		this.iconPath = iconPath;
-	};
-
-	exports.default = _class;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.init = undefined;
-
-	var _jquery = __webpack_require__(7);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function init(table) {
-
-	  var $trStudent = (0, _jquery2.default)('#roll td:first').parent().detach(); // clone + remove
-
-	  for (var i = 0; i < table.length; i++) {
-	    var s = table[i];
-
-	    $trStudent.attr('title', s.firstname);
-	    $trStudent.children().eq(0).empty();
-	    $trStudent.children().eq(0).text(table[i].lastname);
-	    $trStudent.children().eq(1).empty();
-	    $trStudent.children().eq(1).text(table[i].firstname);
-	    $trStudent.appendTo('#roll tbody');
-	    $trStudent = (0, _jquery2.default)('#roll td:first').parent().clone();
-	  }
-	}
-
-	exports.init = init;
-
-/***/ },
-/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10469,8 +10287,84 @@
 
 
 /***/ },
-/* 8 */,
-/* 9 */
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.init = undefined;
+
+	var _homePage = __webpack_require__(3);
+
+	var homePage = _interopRequireWildcard(_homePage);
+
+	var _rankPage = __webpack_require__(4);
+
+	var rankPage = _interopRequireWildcard(_rankPage);
+
+	var _rollPage = __webpack_require__(6);
+
+	var rollPage = _interopRequireWildcard(_rollPage);
+
+	var _studentsPage = __webpack_require__(7);
+
+	var studentsPage = _interopRequireWildcard(_studentsPage);
+
+	var _data = __webpack_require__(8);
+
+	var data = _interopRequireWildcard(_data);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function init() {
+		homePage.init(data.BTNNAVS);
+		rollPage.init(data.STUDENTS);
+		studentsPage.init(data.STUDENTS);
+		rankPage.init(data.STUDENTS);
+	}
+
+	exports.init = init;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.init = undefined;
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init(table) {
+
+		var $divButton = (0, _jquery2.default)('#home .button:first').detach(); // clone + remove
+
+		for (var i = 0; i < table.length; i++) {
+			var b = table[i];
+
+			$divButton.attr('title', b.firstname);
+			$divButton.find('img').attr('src', b.iconPath);
+			$divButton.find('p').empty();
+			$divButton.find('p').text(b.name);
+			$divButton.appendTo('#home .buttons');
+			$divButton = (0, _jquery2.default)('#home .button:first').clone();
+		}
+	}
+
+	exports.init = init;
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10480,7 +10374,139 @@
 	});
 	exports.init = undefined;
 
-	var _jquery = __webpack_require__(7);
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _additionalFunctions = __webpack_require__(5);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init(table) {
+	  var sortTable = sortStudents(table);
+	  disp(sortTable);
+	}
+
+	function sortStudents(table) {
+	  var studentTable = table;
+	  var sortStudent = [];
+	  var sortStudentScore = [];
+
+	  for (var i = 0; i < studentTable.length; i++) {
+	    var s = studentTable[i]; //student
+	    sortStudentScore.push(s.score);
+	  }
+	  sortStudentScore.sort(_additionalFunctions.compareNombres); //tris les scores du plus petit au plus grand
+
+	  for (var _i = sortStudentScore.length - 1; _i >= 0; _i--) {
+	    var score = sortStudentScore[_i];
+	    for (var j = 0; j < studentTable.length; j++) {
+	      var _s = studentTable[j]; // student
+	      if (_s.score == score) {
+	        var t = studentTable.splice(j, 1);
+	        sortStudent.push(t[0]);
+	      }
+	    }
+	  }
+	  return sortStudent;
+	}
+
+	function disp(table) {
+
+	  var r = 0; // rank
+	  var $divStudent = (0, _jquery2.default)('#rank td:first').parent().detach(); // clone + remove
+
+	  for (var i = 0; i < table.length; i++) {
+	    var s = table[i]; // student
+	    var sp = $divStudent.children().eq(1).text(); // score précédent
+
+	    // on incrémente le rank seulement si le score
+	    // est différent du précédent
+	    if (s.score != sp) r++;
+
+	    $divStudent.attr('title', s.firstname);
+	    $divStudent.children().eq(0).empty();
+	    $divStudent.children().eq(0).text(r);
+	    $divStudent.children().eq(1).empty();
+	    $divStudent.children().eq(1).text(s.score);
+	    $divStudent.children().eq(2).empty();
+	    $divStudent.children().eq(2).text(s.lastname);
+	    $divStudent.children().eq(3).empty();
+	    $divStudent.children().eq(3).text(s.firstname);
+	    $divStudent.appendTo('#rank tbody');
+	    $divStudent = (0, _jquery2.default)('#rank td:first').parent().clone();
+	  }
+	}
+
+	exports.init = init;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	function compareNombres(a, b) {
+	  return a - b;
+	}
+
+	exports.compareNombres = compareNombres;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.init = undefined;
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init(table) {
+	  disp(table);
+	}
+
+	function disp(table) {
+
+	  var $trStudent = (0, _jquery2.default)('#roll td:first').parent().detach(); // clone + remove
+
+	  for (var i = 0; i < table.length; i++) {
+	    var s = table[i];
+
+	    $trStudent.attr('title', s.firstname);
+	    $trStudent.children().eq(0).empty();
+	    $trStudent.children().eq(0).text(s.lastname);
+	    $trStudent.children().eq(1).empty();
+	    $trStudent.children().eq(1).text(s.firstname);
+	    $trStudent.appendTo('#roll tbody');
+	    $trStudent = (0, _jquery2.default)('#roll td:first').parent().clone();
+	  }
+	}
+
+	exports.init = init;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.init = undefined;
+
+	var _jquery = __webpack_require__(1);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -10490,23 +10516,94 @@
 
 	  var $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').detach(); // clone + remove
 
-	  console.log($divStudent);
-
 	  for (var i = 0; i < table.length; i++) {
 	    var s = table[i];
 
 	    $divStudent.attr('title', s.firstname);
 	    $divStudent.find('.profil_image').css('background-image', 'url(../' + s.profilImagePath + ')');
-	    $divStudent.find('p').eq(0).empty;
-	    $divStudent.find('p').eq(0).text(s.lastname + ' ' + s.firstname);
-	    $divStudent.find('p').eq(1).empty;
-	    $divStudent.find('p').eq(1).text(s.score);
+	    $divStudent.find('p').empty;
+	    $divStudent.find('p').text(s.lastname + ' ' + s.firstname);
+	    $divStudent.find('h4').empty;
+	    $divStudent.find('h4').text(s.score);
 	    $divStudent.appendTo('#students .list_profil_card');
 	    $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').clone();
 	  }
 	}
 
 	exports.init = init;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.BTNNAVS = exports.STUDENTS = undefined;
+
+	var _student = __webpack_require__(9);
+
+	var _student2 = _interopRequireDefault(_student);
+
+	var _btnNav = __webpack_require__(10);
+
+	var _btnNav2 = _interopRequireDefault(_btnNav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Création de tous les étudiants
+	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville', 50), new _student2.default('Clément', 'Teboule', 60, 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton', 30), new _student2.default('Félix', 'Nahon', 40), new _student2.default('Clément', 'Dussol', 5), new _student2.default('Joel', 'Alves Canteiro', 60)];
+
+	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
+
+	exports.STUDENTS = STUDENTS;
+	exports.BTNNAVS = BTNNAVS;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _class = function _class(firstname, lastname, score, profilImagePath) {
+		_classCallCheck(this, _class);
+
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.score = score;
+		this.profilImagePath = profilImagePath || 'img/eleves.jpg';
+	};
+
+	exports.default = _class;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _class = function _class(name, iconPath) {
+		_classCallCheck(this, _class);
+
+		this.name = name;
+		this.iconPath = iconPath;
+	};
+
+	exports.default = _class;
 
 /***/ }
 /******/ ]);

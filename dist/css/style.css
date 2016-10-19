@@ -10,11 +10,21 @@ a:hover{
 }
 /*divers*/
 .center{margin:auto auto;}
+.tl_radius {border-top-left-radius: 5px;}
+.tr_radius {border-top-right-radius: 5px;}
+.bl_radius {border-bottom-left-radius: 5px;}
+.br_radius {border-bottom-right-radius: 5px;}
+.radius    {border-radius: 5px;}
+.boxshadow {box-shadow: 2px 2px 5px 1px rgba(20, 20, 20, 0.1);}
+/*textes*/
+h1{font-size:6em;}
+h2{font-size:4.5em;}
+h3{font-size:3.5em;}
+h4{font-size:3em;}
+h5{font-size:2em;}
+h6{font-size:1.4em;}
 .txt_center{text-align: center;}
-.tl_radius {border-top-left-radius: 4px;}
-.tr_radius {border-top-right-radius: 4px;}
-.bl_radius {border-bottom-left-radius: 4px;}
-.br_radius {border-bottom-right-radius: 4px;}
+.txt_bold{font-weight: 700;}
 /*couleurs*/
 .black  {color: #000;}
 .white  {color: #fff;}
@@ -76,34 +86,40 @@ a:hover{
 }
 #home .title{
 	line-height: 4.5em;
-	text-align: center;
-	font-size: 6em;	
 }
 
 /************/
 /* Students */
 .list_profil_card{
-  overflow: scroll;
+  overflow-y: scroll;
   max-height: 820px;
 }
 .profil_card_min{
+  overflow: hidden;
   display : inline-block;
   cursor  : pointer;
-  width   : 26%;
-  margin  : 5% 3%;
+  width   : 41%;
+  margin  : 5% 1% 0 5%;
   border: 1px solid #537BAA;
   border-radius: 6px;
 }
+.profil_card_min p{
+  font-size: 1.2em;
+}
+.profil_card_min h4{
+  line-height: 0.7em;
+}
 .profil_image{
-  margin: 0 0 5% 0;
+  margin: 0 0 3% 0;
   width: 100%;
   height: 80px;
   background-image: url(../img/eleves.jpg);
   background-size: cover;
   background-position: center;
   border-radius: 5px 5px 0 0;
-  box-shadow: 0px -2px 2px 1px rgba(20, 20, 20, 0.1) inset;
+  box-shadow: 0px -2px 2px 1px rgba(20, 20, 20, 0.2) inset;
 }
+
 
 /********/
 /* Rank */
@@ -114,7 +130,6 @@ a:hover{
 	font-size: 1.8em;
 }
 table{
-  box-shadow: 2px 2px 5px 1px rgba(20, 20, 20, 0.1);
 }
 
 input[type=radio] {

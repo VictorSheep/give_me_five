@@ -1,8 +1,8 @@
 export default class{
-	constructor(firstname,lastname,profilImagePath){
+	constructor(firstname,lastname,score,profilImagePath){
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.score = 0;
+		this.score = score;
     this.profilImagePath = profilImagePath || 'img/eleves.jpg';
 	}
 }
