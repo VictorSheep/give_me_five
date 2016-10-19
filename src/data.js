@@ -12,9 +12,9 @@ let STUDENTS = [
 ];
 
 let BTNNAVS = [
-	new BtnNav('élève','img/eleves.jpg'),
-	new BtnNav('classement','img/podium.jpg'),
-	new BtnNav('appel','img/liste.png')
+	new BtnNav('élève','img/eleves.jpg','students'),
+	new BtnNav('classement','img/podium.jpg','rank'),
+	new BtnNav('appel','img/liste.png','roll')
 ];
 
 export{STUDENTS,BTNNAVS};

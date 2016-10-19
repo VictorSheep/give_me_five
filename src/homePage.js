@@ -11,6 +11,7 @@ function disp(table){
 		let b = table[i];
 
 		$divButton.attr('title',b.firstname);
+    $divButton.attr('id',i); // id pour lier interfaces / instances
 		$divButton.find('img').attr('src',b.iconPath);
 		$divButton.find('p').empty();
 		$divButton.find('p').text(b.name);

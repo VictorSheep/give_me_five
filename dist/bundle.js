@@ -10361,6 +10361,7 @@
 			var b = table[i];
 
 			$divButton.attr('title', b.firstname);
+			$divButton.attr('id', i); // id pour lier interfaces / instances
 			$divButton.find('img').attr('src', b.iconPath);
 			$divButton.find('p').empty();
 			$divButton.find('p').text(b.name);
@@ -10567,7 +10568,7 @@
 	// Création de tous les étudiants
 	var STUDENTS = [new _student2.default('Mathieu', 'Vandeville', 50), new _student2.default('Clément', 'Teboule', 60, 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton', 30), new _student2.default('Félix', 'Nahon', 40), new _student2.default('Clément', 'Dussol', 5), new _student2.default('Joel', 'Alves Canteiro', 60)];
 
-	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg'), new _btnNav2.default('classement', 'img/podium.jpg'), new _btnNav2.default('appel', 'img/liste.png')];
+	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg', 'students'), new _btnNav2.default('classement', 'img/podium.jpg', 'rank'), new _btnNav2.default('appel', 'img/liste.png', 'roll')];
 
 	exports.STUDENTS = STUDENTS;
 	exports.BTNNAVS = BTNNAVS;
@@ -10597,22 +10598,50 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var _class = function _class(name, iconPath) {
-		_classCallCheck(this, _class);
+	var _class = function () {
+	  function _class(name, iconPath, pageID) {
+	    _classCallCheck(this, _class);
 
-		this.name = name;
-		this.iconPath = iconPath;
-	};
+	    this.name = name;
+	    this.iconPath = iconPath;
+	    this.pageID = pageID;
+	    this.selected = false;
+	  }
+
+	  _createClass(_class, [{
+	    key: 'displayPage',
+	    value: function displayPage() {
+	      (0, _jquery2.default)('#' + this.pageID).removeClass('disabled');
+	      this.selected = true;
+	    }
+	  }, {
+	    key: 'hidePage',
+	    value: function hidePage() {
+	      (0, _jquery2.default)('#' + this.pageID).addClass('disabled');
+	      this.selected = false;
+	    }
+	  }]);
+
+	  return _class;
+	}();
 
 	exports.default = _class;
 
@@ -10631,10 +10660,13 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _data = __webpack_require__(8);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function init(table) {
 	  disp(table);
+	  on_mousedown();
 	}
 
 	function disp(table) {
@@ -10644,6 +10676,7 @@
 	    var b = table[i];
 
 	    $divButton.attr('title', b.firstname);
+	    $divButton.attr('id', i); // id pour lier interfaces / instances
 	    $divButton.find('img').attr('src', b.iconPath);
 	    $divButton.find('p').empty();
 	    $divButton.find('p').text(b.name);
@@ -10652,6 +10685,21 @@
 	    $divButton = (0, _jquery2.default)('nav div:first').clone();
 	  }
 	}
+
+	function on_mousedown() {
+	  (0, _jquery2.default)('nav div').mousedown(function () {
+	    var navId = this.id;
+	    console.log(navId);
+
+	    for (var i = _data.BTNNAVS.length - 1; i >= 0; i--) {
+	      var b = _data.BTNNAVS[i];
+	      if (b.selected) b.hidePage();
+	    }
+
+	    _data.BTNNAVS[navId].displayPage();
+	  });
+	}
+
 	exports.init = init;
 
 /***/ }

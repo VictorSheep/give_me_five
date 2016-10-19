@@ -1,7 +1,9 @@
 import $ from 'jquery';
+import {BTNNAVS} from './data';
 
 function init(table){
   disp(table);
+  on_mousedown();
 }
 
 function disp(table){
@@ -11,6 +13,7 @@ function disp(table){
     let b = table[i];
 
     $divButton.attr('title',b.firstname);
+    $divButton.attr('id',i); // id pour lier interfaces / instances
     $divButton.find('img').attr('src',b.iconPath);
     $divButton.find('p').empty();
     $divButton.find('p').text(b.name);
@@ -19,4 +22,22 @@ function disp(table){
     $divButton = $('nav div:first').clone();
   }
 }
+
+function on_mousedown(){
+  $('nav div').mousedown(function(){
+    let navId = this.id;
+    console.log(navId);
+
+    for (var i=BTNNAVS.length-1; i>=0; i--) {
+      let b = BTNNAVS[i];
+      if(b.selected) b.hidePage();
+    }
+
+    BTNNAVS[navId].displayPage();
+
+  })
+}
+
+
+
 export{init};
