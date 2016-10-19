@@ -20,12 +20,18 @@ constructor(firstname,lastname,score,profilImagePath){
     updateScore(){
         let s = 0;
 
+        if(this.attendance<0)   this.attendance=0;
+        if(this.lateness<0)     this.lateness=0;
+        if(this.absence<0)      this.absence=0;
+        if(this.contribution<0) this.contribution=0;
+        if(this.tablePassage<0) this.tablePassage=0;
+        
         s += this.attendance*10;
         s += this.lateness*(-2);
         s += this.absence*(-10);
         s += this.contribution*2;
         s += this.tablePassage*5;
-        
+
         if(s<0) s=0;
 
         this.score = s;
