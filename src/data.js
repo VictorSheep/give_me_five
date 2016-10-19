@@ -1,5 +1,11 @@
 import Student from './student.class';
 import BtnNav from './btnNav.class';
+import Attendance from './attendance.class';
+import Lateness from './lateness.class';
+import Absence from './absence.class';
+import Contribution from './contribution.class';
+import TablePassage from './tablePassage.class';
+
 
 // Création de tous les étudiants
 var STUDENTS = [
@@ -17,4 +23,12 @@ let BTNNAVS = [
 	new BtnNav('appel','img/liste.png','roll')
 ];
 
-export{STUDENTS,BTNNAVS};
+let FEATURES = [
+  new Attendance(),
+  new Lateness(),
+  new Absence(),
+  new Contribution(),
+  new TablePassage()
+];
+
+export{STUDENTS,BTNNAVS,FEATURES};

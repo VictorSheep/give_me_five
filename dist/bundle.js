@@ -10544,18 +10544,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function init(table) {
-	  disp(table);
+	function init() {
+	  dispCardMin();
+	  dispFeatures();
 	  clkOnProfilCardMin();
 	  clkOnIncreaseItem();
 	}
 
-	function disp(table) {
+	function dispCardMin() {
 
 	  var $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').detach(); // clone + remove
 
-	  for (var i = 0; i < table.length; i++) {
-	    var s = table[i];
+	  for (var i = 0; i < _data.STUDENTS.length; i++) {
+	    var s = _data.STUDENTS[i];
 
 	    $divStudent.attr('title', s.firstname);
 	    $divStudent.attr('id', i);
@@ -10566,6 +10567,47 @@
 	    $divStudent.find('h4').text(s.score);
 	    $divStudent.appendTo('#students .list_profil_card');
 	    $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').clone();
+	  }
+	}
+
+	function dispFeatures() {
+	  var $divFeatIcon = (0, _jquery2.default)('#students .icons_features').children().eq(0).detach(); // clone + remove
+	  var $divFeatNb = (0, _jquery2.default)('#students #rating').children().eq(0).detach();
+	  var $divFeatInc = (0, _jquery2.default)('#students #increase').children().eq(0).detach();
+	  var $divFeatDec = (0, _jquery2.default)('#students #decrease').children().eq(0).detach();
+
+	  (0, _jquery2.default)('#students .icons_features').empty();
+	  (0, _jquery2.default)('#students #rating').empty();
+	  (0, _jquery2.default)('#students #increase').empty();
+	  (0, _jquery2.default)('#students #decrease').empty();
+
+	  for (var i = 0; i < _data.FEATURES.length; i++) {
+	    var f = _data.FEATURES[i];
+
+	    $divFeatIcon.attr('title', f.title);
+	    $divFeatIcon.attr('id', i);
+	    $divFeatIcon.removeClass();
+	    $divFeatIcon.addClass(f.color);
+	    $divFeatIcon.children().removeClass();
+	    $divFeatIcon.children().addClass(f.toFaClass());
+	    $divFeatIcon.appendTo('#students .icons_features');
+	    $divFeatIcon = (0, _jquery2.default)('#students .profil_card_detail h5:first').clone();
+
+	    $divFeatNb.attr('title', f.title);
+	    $divFeatNb.attr('id', f.name);
+	    $divFeatNb.appendTo('#students #rating');
+	    $divFeatNb.removeClass();
+	    $divFeatNb.addClass(f.color);
+	    $divFeatNb = (0, _jquery2.default)('#students #rating h5:first').clone();
+
+	    $divFeatInc.attr('title', f.title);
+	    $divFeatInc.attr('id', i);
+	    $divFeatInc.appendTo('#students #increase');
+	    $divFeatInc = (0, _jquery2.default)('#students #increase').children().eq(0).clone();
+	    $divFeatDec.attr('title', f.title);
+	    $divFeatDec.attr('id', i);
+	    $divFeatDec.appendTo('#students #decrease');
+	    $divFeatDec = (0, _jquery2.default)('#students #decrease').children().eq(0).clone();
 	  }
 	}
 
@@ -10621,7 +10663,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.BTNNAVS = exports.STUDENTS = undefined;
+	exports.FEATURES = exports.BTNNAVS = exports.STUDENTS = undefined;
 
 	var _student = __webpack_require__(9);
 
@@ -10631,6 +10673,26 @@
 
 	var _btnNav2 = _interopRequireDefault(_btnNav);
 
+	var _attendance = __webpack_require__(12);
+
+	var _attendance2 = _interopRequireDefault(_attendance);
+
+	var _lateness = __webpack_require__(14);
+
+	var _lateness2 = _interopRequireDefault(_lateness);
+
+	var _absence = __webpack_require__(15);
+
+	var _absence2 = _interopRequireDefault(_absence);
+
+	var _contribution = __webpack_require__(16);
+
+	var _contribution2 = _interopRequireDefault(_contribution);
+
+	var _tablePassage = __webpack_require__(17);
+
+	var _tablePassage2 = _interopRequireDefault(_tablePassage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// Création de tous les étudiants
@@ -10638,8 +10700,11 @@
 
 	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg', 'students'), new _btnNav2.default('classement', 'img/podium.jpg', 'rank'), new _btnNav2.default('appel', 'img/liste.png', 'roll')];
 
+	var FEATURES = [new _attendance2.default(), new _lateness2.default(), new _absence2.default(), new _contribution2.default(), new _tablePassage2.default()];
+
 	exports.STUDENTS = STUDENTS;
 	exports.BTNNAVS = BTNNAVS;
+	exports.FEATURES = FEATURES;
 
 /***/ },
 /* 9 */
@@ -10788,6 +10853,324 @@
 	}
 
 	exports.init = init;
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _feature = __webpack_require__(13);
+
+	var _feature2 = _interopRequireDefault(_feature);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Feature) {
+	  _inherits(_class, _Feature);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'attendance', 'Présence', 'check', 'blue'));
+	  }
+	  // ajoute un point dans attendance à un student
+	  // s : instance de Student
+
+
+	  _createClass(_class, [{
+	    key: 'addPoint',
+	    value: function addPoint(s) {
+	      s.attendance++;
+	    }
+	    // retire un point dans attendance à un student
+	    // s : instance de Student
+
+	  }, {
+	    key: 'removePoint',
+	    value: function removePoint(s) {
+	      s.attendance--;
+	    }
+	  }]);
+
+	  return _class;
+	}(_feature2.default);
+
+	exports.default = _class;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _class = function () {
+	  function _class(name, title, iconFa, color) {
+	    _classCallCheck(this, _class);
+
+	    this.name = name;
+	    this.title = title;
+	    this.iconFa = iconFa;
+	    this.color = color || 'black';
+	  }
+
+	  _createClass(_class, [{
+	    key: 'toFaClass',
+	    value: function toFaClass() {
+	      var divfa = 'fa fa-';
+	      divfa += this.iconFa;
+	      return divfa;
+	    }
+	  }]);
+
+	  return _class;
+	}();
+
+	exports.default = _class;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _feature = __webpack_require__(13);
+
+	var _feature2 = _interopRequireDefault(_feature);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Feature) {
+	  _inherits(_class, _Feature);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'lateness', 'Retard', 'clock-o'));
+	  }
+	  // ajoute un point dans lateness à un student
+	  // s : instance de Student
+
+
+	  _createClass(_class, [{
+	    key: 'addPoint',
+	    value: function addPoint(s) {
+	      s.lateness++;
+	    }
+	    // retire un point dans lateness à un student
+	    // s : instance de Student
+
+	  }, {
+	    key: 'removePoint',
+	    value: function removePoint(s) {
+	      s.lateness--;
+	    }
+	  }]);
+
+	  return _class;
+	}(_feature2.default);
+
+	exports.default = _class;
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _feature = __webpack_require__(13);
+
+	var _feature2 = _interopRequireDefault(_feature);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Feature) {
+	  _inherits(_class, _Feature);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'absence', 'Absence', 'times', 'orange'));
+	  }
+	  // ajoute un point dans absence à un student
+	  // s : instance de Student
+
+
+	  _createClass(_class, [{
+	    key: 'addPoint',
+	    value: function addPoint(s) {
+	      s.absence++;
+	    }
+	    // retire un point dans absence à un student
+	    // s : instance de Student
+
+	  }, {
+	    key: 'removePoint',
+	    value: function removePoint(s) {
+	      s.absence--;
+	    }
+	  }]);
+
+	  return _class;
+	}(_feature2.default);
+
+	exports.default = _class;
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _feature = __webpack_require__(13);
+
+	var _feature2 = _interopRequireDefault(_feature);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Feature) {
+	  _inherits(_class, _Feature);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'contribution', 'Contribution', 'hand-paper-o'));
+	  }
+	  // ajoute un point dans contribution à un student
+	  // s : instance de Student
+
+
+	  _createClass(_class, [{
+	    key: 'addPoint',
+	    value: function addPoint(s) {
+	      s.contribution++;
+	    }
+	    // retire un point dans contribution à un student
+	    // s : instance de Student
+
+	  }, {
+	    key: 'removePoint',
+	    value: function removePoint(s) {
+	      s.contribution--;
+	    }
+	  }]);
+
+	  return _class;
+	}(_feature2.default);
+
+	exports.default = _class;
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _feature = __webpack_require__(13);
+
+	var _feature2 = _interopRequireDefault(_feature);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _class = function (_Feature) {
+	  _inherits(_class, _Feature);
+
+	  function _class() {
+	    _classCallCheck(this, _class);
+
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'table_passage', 'Passage au tableau', 'table'));
+	  }
+	  // ajoute un point dans tablePassage à un student
+	  // s : instance de Student
+
+
+	  _createClass(_class, [{
+	    key: 'addPoint',
+	    value: function addPoint(s) {
+	      s.tablePassage++;
+	    }
+	    // retire un point dans tablePassage à un student
+	    // s : instance de Student
+
+	  }, {
+	    key: 'removePoint',
+	    value: function removePoint(s) {
+	      s.tablePassage--;
+	    }
+	  }]);
+
+	  return _class;
+	}(_feature2.default);
+
+	exports.default = _class;
 
 /***/ }
 /******/ ]);

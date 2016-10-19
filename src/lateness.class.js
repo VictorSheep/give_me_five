@@ -1,16 +1,16 @@
 import Feature from './feature.class';
 export default class extends Feature{
   constructor(){
-    super('attendance','Présence', 'check','blue');
+    super('lateness','Retard', 'clock-o');
   }
-  // ajoute un point dans attendance à un student
+  // ajoute un point dans lateness à un student
   // s : instance de Student
   addPoint(s){
-    s.attendance ++;
+    s.lateness ++;
   }
-  // retire un point dans attendance à un student
+  // retire un point dans lateness à un student
   // s : instance de Student
   removePoint(s){
-    s.attendance --;
+    s.lateness --;
   }
 }
