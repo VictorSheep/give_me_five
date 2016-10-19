@@ -1,6 +1,10 @@
 import $ from 'jquery';
 
 function init(table){
+  disp(table);
+}
+
+function disp(table){
 
   let $divStudent = $('#students .profil_card_min:first').detach(); // clone + remove
 

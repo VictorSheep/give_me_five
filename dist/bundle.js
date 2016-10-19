@@ -10309,6 +10309,10 @@
 
 	var rollPage = _interopRequireWildcard(_rollPage);
 
+	var _menu = __webpack_require__(11);
+
+	var menu = _interopRequireWildcard(_menu);
+
 	var _studentsPage = __webpack_require__(7);
 
 	var studentsPage = _interopRequireWildcard(_studentsPage);
@@ -10324,6 +10328,7 @@
 		rollPage.init(data.STUDENTS);
 		studentsPage.init(data.STUDENTS);
 		rankPage.init(data.STUDENTS);
+		menu.init(data.BTNNAVS);
 	}
 
 	exports.init = init;
@@ -10346,7 +10351,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function init(table) {
+		disp(table);
+	}
 
+	function disp(table) {
 		var $divButton = (0, _jquery2.default)('#home .button:first').detach(); // clone + remove
 
 		for (var i = 0; i < table.length; i++) {
@@ -10360,7 +10368,6 @@
 			$divButton = (0, _jquery2.default)('#home .button:first').clone();
 		}
 	}
-
 	exports.init = init;
 
 /***/ },
@@ -10513,6 +10520,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function init(table) {
+	  disp(table);
+	}
+
+	function disp(table) {
 
 	  var $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').detach(); // clone + remove
 
@@ -10604,6 +10615,44 @@
 	};
 
 	exports.default = _class;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.init = undefined;
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init(table) {
+	  disp(table);
+	}
+
+	function disp(table) {
+	  var $divButton = (0, _jquery2.default)('nav div:first').detach(); // clone + remove
+
+	  for (var i = 0; i < table.length; i++) {
+	    var b = table[i];
+
+	    $divButton.attr('title', b.firstname);
+	    $divButton.find('img').attr('src', b.iconPath);
+	    $divButton.find('p').empty();
+	    $divButton.find('p').text(b.name);
+	    if (i == table.length - 1) $divButton.addClass('br_radius');
+	    $divButton.appendTo('nav');
+	    $divButton = (0, _jquery2.default)('nav div:first').clone();
+	  }
+	}
+	exports.init = init;
 
 /***/ }
 /******/ ]);

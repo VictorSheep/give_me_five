@@ -1,7 +1,10 @@
 import $ from 'jquery';
 
 function init(table){
+	disp(table);
+}
 
+function disp(table){
 	let $divButton = $('#home .button:first').detach(); // clone + remove
 
 	for (var i = 0; i < table.length; i++) {
@@ -15,5 +18,4 @@ function init(table){
 		$divButton = $('#home .button:first').clone();
 	}
 }
-
 export{init};

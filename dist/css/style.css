@@ -69,6 +69,27 @@ h6{font-size:1.4em;}
 	display: none;
 }
 
+/*******/
+/* Nav */
+nav img{
+  width:35%;
+}
+nav div>*{
+  display: inline-block;
+}
+nav div{
+  width:9%;
+  border-bottom:2px solid #000;
+  cursor: pointer;
+}
+nav div>img{
+  margin: 2px 2px 2px 0;
+}
+nav div:hover{
+  background-color: #537BAA;
+  color: white;
+}
+
 /********/
 /* Home */
 #home .button{
