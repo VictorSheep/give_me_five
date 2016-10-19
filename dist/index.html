@@ -5,10 +5,11 @@
 	<title>Give Me Five</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
 
-	<nav>
+	<nav class="">
 		<div class="bg_xen">
 			<img src="img/eleves.jpg">
 			<p>nom bouton</p>
@@ -18,7 +19,7 @@
 	<!-- DEBUT Home -->
 	<div class="disabled container-fluid" id="home">
 		<div class="row">
-			<div class="col-md-12 ">
+			<div class="col-md-12 title">
 				<h1 class="txt_center">Give Me Five</h1>
 			</div>
 		</div>
@@ -37,25 +38,85 @@
 	
 	<!-- DEBUT Students -->
 	<div class="container" id="students">
+		<!--marge du haut-->
 		<div class="row">
 			<div class="h_100 col-md-12">
 			</div>
 		</div>
 
-		<div class="row boxshadow radius">
+		<div class="row boxshadow radius bg_white">
+			<!-- début liste élève -->
 			<div class="col-md-5 list_profil_card bg_white tl_radius bl_radius">
-
 				<div class="profil_card_min bg_blue white boxshadow">
 					<div class="center profil_image"></div>
 					<p class="txt_center txt_bold">Nom Prénom</p>
 					<h4 class="txt_center">score</h4>
 				</div>
-
 			</div>
+			<!-- //fin liste élève -->
 
-			<div class="col-md-7 h_100 bg_xen tr_radius br_radius">
-				
+			<!-- début carte élève détaillé -->
+			<div class="col-md-7 tr_radius br_radius profil_card_detail">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 h_50"></div>
+					</div>
+					<div class="row flag"> <!-- flag = ajout d'id pour lier js et html -->
+						<div class="col-md-5">
+							<div class="center profil_image">
+							</div>
+						</div>
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-1">
+							<h5 title="Présence" class="blue"><i class="fa fa-check" aria-hidden="true"></i></h5>
+							<h5 title="Retard"><i class="fa fa-clock-o" aria-hidden="true"></i></h5>
+							<h5 title="Absence" class="orange"><i class="fa fa-times" aria-hidden="true"></i></h5>
+							<h5 title="Contribution"><i class="fa fa-hand-paper-o" aria-hidden="true"></i></h5>
+							<h5 title="Table_passage"><i class="fa fa-table" aria-hidden="true"></i></h5>
+						</div>
+						<div class="col-md-1" id="rating">
+							<h5 id="attendance" title="Présence" class="blue">5</h5>
+							<h5 id="lateness" title="Retard">									2</h5>
+							<h5 id="absence" title="Absence" class="orange">	0</h5>
+							<h5 id="contribution" title="Contribution">				2</h5>
+							<h5 id="table_passage" title="Passage au tableau">0</h5>
+						</div>
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-1" id="increase">
+							<h5 class="button" title="Présence"><i class="fa fa-plus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="Retard"><i class="fa fa-plus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="Absence"><i class="fa fa-plus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="Contribution"><i class="fa fa-plus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="Passage au tableau"><i class="fa fa-plus" aria-hidden="true"></i></h5>
+						</div>
+						<div class="col-md-1" id="decrease">
+							<h5 class="button" title="Présence"><i class="fa fa-minus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="Retard"><i class="fa fa-minus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="Absence"><i class="fa fa-minus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="Contribution"><i class="fa fa-minus" aria-hidden="true"></i></h5>
+							<h5 class="button" title="passage au tableau"><i class="fa fa-minus" aria-hidden="true"></i></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 h_50"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 txt_center" id="names">
+							<h4 id="lastname">Nom</h4>
+							<h4 id="firstname">Prénom</h4>
+						</div>
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-5 txt_center">
+							<h1 id="pcd_score">46</h1>
+						</div>
+					</div>		
+				</div>
 			</div>
+			<!-- //fin carte élève détaillé -->
+
 		</div>
 	</div>
 	<!-- //FIN Students -->
@@ -116,27 +177,25 @@
 				  </thead>
 				  <tbody>
 
-				    <tr>
+				    <tr> <!-- tr cloné à rollPage.init() -->
 				      <td>Nom</td>
 				      <td>Prénom</td>
-							<form>
-								<td class="txt_center">
-							    <label class="radio-inline">
-							      <input type="radio" name="optradio">
-							    </label>
-							  </td>
-								<td class="txt_center">
-							    <label class="radio-inline">
-							      <input type="radio" name="optradio">
-							    </label>
-							  </td>
-								<td class="txt_center">
-							    <label class="radio-inline">
-							      <input type="radio" name="optradio">
-							    </label>
-							  </td>
-						  </form>
-						  </form>
+				      <td colspan="3">
+				      	<form>
+									<div class="txt_center">
+								    <label class="radio-inline">
+								      <input type="radio" name="optradio">
+								    </label>
+								    <label class="radio-inline radio-middle">
+								      <input type="radio" name="optradio">
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" name="optradio">
+								    </label>
+								  </div>
+							  </form>
+				      </td>
+							
 				    </tr>
 
 				  </tbody>

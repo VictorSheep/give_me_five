@@ -10293,7 +10293,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	exports.init = undefined;
 
@@ -10324,11 +10324,18 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function init() {
-		homePage.init(data.BTNNAVS);
-		rollPage.init(data.STUDENTS);
-		studentsPage.init(data.STUDENTS);
-		rankPage.init(data.STUDENTS);
-		menu.init(data.BTNNAVS);
+	  // Attribution des id aux instances de Student
+	  for (var i = data.STUDENTS.length - 1; i >= 0; i--) {
+	    var s = data.STUDENTS[i];
+	    s.init(i);
+
+	    console.log(s.id);
+	  }
+	  homePage.init(data.BTNNAVS);
+	  rollPage.init(data.STUDENTS);
+	  studentsPage.init(data.STUDENTS);
+	  rankPage.init(data.STUDENTS);
+	  menu.init(data.BTNNAVS);
 	}
 
 	exports.init = init;
@@ -10340,7 +10347,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 	exports.init = undefined;
 
@@ -10348,26 +10355,38 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _data = __webpack_require__(8);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function init(table) {
-		disp(table);
+			disp(table);
+			on_mousedown();
 	}
 
 	function disp(table) {
-		var $divButton = (0, _jquery2.default)('#home .button:first').detach(); // clone + remove
+			var $divButton = (0, _jquery2.default)('#home .button:first').detach(); // clone + remove
 
-		for (var i = 0; i < table.length; i++) {
-			var b = table[i];
+			for (var i = 0; i < table.length; i++) {
+					var b = table[i];
 
-			$divButton.attr('title', b.firstname);
-			$divButton.attr('id', i); // id pour lier interfaces / instances
-			$divButton.find('img').attr('src', b.iconPath);
-			$divButton.find('p').empty();
-			$divButton.find('p').text(b.name);
-			$divButton.appendTo('#home .buttons');
-			$divButton = (0, _jquery2.default)('#home .button:first').clone();
-		}
+					$divButton.attr('title', b.firstname);
+					$divButton.attr('id', i); // id pour lier interfaces / instances
+					$divButton.find('img').attr('src', b.iconPath);
+					$divButton.find('p').empty();
+					$divButton.find('p').text(b.name);
+					$divButton.appendTo('#home .buttons');
+					$divButton = (0, _jquery2.default)('#home .button:first').clone();
+			}
+	}
+	function on_mousedown() {
+			(0, _jquery2.default)('#home .button').mousedown(function () {
+					var navId = this.id;
+
+					(0, _jquery2.default)('#home').addClass('disabled');
+					(0, _jquery2.default)('nav').removeClass('disabled');
+					_data.BTNNAVS[navId].displayPage();
+			});
 	}
 	exports.init = init;
 
@@ -10396,7 +10415,7 @@
 	}
 
 	function sortStudents(table) {
-	  var studentTable = table;
+	  var studentTable = table.slice(0);
 	  var sortStudent = [];
 	  var sortStudentScore = [];
 
@@ -10416,6 +10435,7 @@
 	      }
 	    }
 	  }
+	  console.log(table);
 	  return sortStudent;
 	}
 
@@ -10488,10 +10508,12 @@
 
 	  var $trStudent = (0, _jquery2.default)('#roll td:first').parent().detach(); // clone + remove
 
+
 	  for (var i = 0; i < table.length; i++) {
 	    var s = table[i];
 
 	    $trStudent.attr('title', s.firstname);
+	    $trStudent.attr('id', i);
 	    $trStudent.children().eq(0).empty();
 	    $trStudent.children().eq(0).text(s.lastname);
 	    $trStudent.children().eq(1).empty();
@@ -10518,10 +10540,14 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _data = __webpack_require__(8);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function init(table) {
 	  disp(table);
+	  clkOnProfilCardMin();
+	  clkOnIncreaseItem();
 	}
 
 	function disp(table) {
@@ -10532,14 +10558,56 @@
 	    var s = table[i];
 
 	    $divStudent.attr('title', s.firstname);
+	    $divStudent.attr('id', i);
 	    $divStudent.find('.profil_image').css('background-image', 'url(../' + s.profilImagePath + ')');
-	    $divStudent.find('p').empty;
+	    $divStudent.find('p').empty();
 	    $divStudent.find('p').text(s.lastname + ' ' + s.firstname);
-	    $divStudent.find('h4').empty;
+	    $divStudent.find('h4').empty();
 	    $divStudent.find('h4').text(s.score);
 	    $divStudent.appendTo('#students .list_profil_card');
 	    $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').clone();
 	  }
+	}
+
+	function clkOnIncreaseItem() {
+	  (0, _jquery2.default)('#students #increase').children().mousedown(function () {
+	    var profilId = (0, _jquery2.default)('#students .flag').attr('id');
+	    var s = _data.STUDENTS[profilId];
+	  });
+	}
+
+	function clkOnProfilCardMin() {
+	  (0, _jquery2.default)('#students .profil_card_min').mousedown(function () {
+	    var profilId = this.id;
+	    affStudentDetail(profilId);
+	  });
+	}
+
+	/**
+	* Affiche la carte détaillé d'un étudiant sur la page student
+	* profilId : id d'une instance de la classe Student
+	*/
+	function affStudentDetail(profilId) {
+	  var $divStudent = (0, _jquery2.default)('#students div.profil_card_detail'); // clone + remove
+	  var s = _data.STUDENTS[profilId];
+
+	  $divStudent.find('.profil_image').css('background-image', 'url(../' + s.profilImagePath + ')');
+
+	  $divStudent.find('.flag').attr('id', profilId);
+
+	  $divStudent.find('#rating').children().empty();
+	  $divStudent.find('#rating #attendance').text(s.attendance);
+	  $divStudent.find('#rating #lateness').text(s.lateness);
+	  $divStudent.find('#rating #absence').text(s.absence);
+	  $divStudent.find('#rating #contribution').text(s.contribution);
+	  $divStudent.find('#rating #table_passage').text(s.tablePassage);
+
+	  $divStudent.find('#pcd_score').empty();
+	  $divStudent.find('#pcd_score').text(s.score);
+
+	  $divStudent.find('#names').children().empty();
+	  $divStudent.find('#names #firstname').text(s.firstname);
+	  $divStudent.find('#names #lastname').text(s.lastname);
 	}
 
 	exports.init = init;
@@ -10580,19 +10648,39 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var _class = function _class(firstname, lastname, score, profilImagePath) {
-		_classCallCheck(this, _class);
+	var _class = function () {
+	  function _class(firstname, lastname, score, profilImagePath) {
+	    _classCallCheck(this, _class);
 
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.score = score;
-		this.profilImagePath = profilImagePath || 'img/eleves.jpg';
-	};
+	    this.id = null;
+	    this.firstname = firstname;
+	    this.lastname = lastname;
+	    this.profilImagePath = profilImagePath || 'img/eleves.jpg';
+
+	    this.attendance = 0; // nb présence
+	    this.lateness = 0; // nb retard
+	    this.absence = 0; // nb absence
+	    this.contribution = 0; // nb contribution
+	    this.tablePassage = 0; // score passage au tableau
+	    this.score = 0; // score total
+	  }
+
+	  _createClass(_class, [{
+	    key: 'init',
+	    value: function init(id) {
+	      this.id = id;
+	    }
+	  }]);
+
+	  return _class;
+	}();
 
 	exports.default = _class;
 
@@ -10689,7 +10777,6 @@
 	function on_mousedown() {
 	  (0, _jquery2.default)('nav div').mousedown(function () {
 	    var navId = this.id;
-	    console.log(navId);
 
 	    for (var i = _data.BTNNAVS.length - 1; i >= 0; i--) {
 	      var b = _data.BTNNAVS[i];

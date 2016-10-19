@@ -4,6 +4,7 @@ body{
 	background-image: url('../img/square_wallpaper.png');
 	background-size: 110px 55px;
 	overflow: hidden;
+  background-color: #fbfbfb;
 }
 a:hover{
 	text-decoration: none;
@@ -21,7 +22,7 @@ h1{font-size:6em;}
 h2{font-size:4.5em;}
 h3{font-size:3.5em;}
 h4{font-size:3em;}
-h5{font-size:2em;}
+h5{font-size:2.1em;}
 h6{font-size:1.4em;}
 .txt_center{text-align: center;}
 .txt_bold{font-weight: 700;}
@@ -31,7 +32,7 @@ h6{font-size:1.4em;}
 .grey   {color: #888;}
 .xen    {color: #AFC3DA;}
 .blue   {color: #537BAA;}
-.orange {color: #D35612:;}
+.orange {color: #D35612;}
 
 .bg_black  {background-color: #000;}
 .bg_white  {background-color: #fff;}
@@ -110,7 +111,8 @@ nav div:hover{
 	border-radius: 10px;
 }
 #home .title{
-	line-height: 4.5em;
+  margin-top: 100px;
+  margin-bottom: 8%;
 }
 
 /************/
@@ -134,15 +136,28 @@ nav div:hover{
 .profil_card_min h4{
   line-height: 0.7em;
 }
-.profil_image{
+.list_profil_card .profil_image{
   margin: 0 0 3% 0;
-  width: 100%;
   height: 80px;
-  background-image: url(../img/eleves.jpg);
-  background-size: cover;
-  background-position: center;
   border-radius: 5px 5px 0 0;
   box-shadow: 0px -2px 2px 1px rgba(20, 20, 20, 0.2) inset;
+}
+.profil_card_detail .profil_image{
+  height: 17em;
+  border-radius: 50%;
+  border: 2px solid #AFC3DA;
+}
+.profil_image{
+  width: 100%;
+  background-image: url(../img/eleves.jpg);
+  background-size: cover;
+  background-position: center;  
+}
+#increase>.button, #decrease>.button{
+  cursor: pointer;
+}
+#increase>.button:hover, #decrease>.button:hover{
+  color:#537BAA;
 }
 
 
@@ -154,8 +169,6 @@ nav div:hover{
 #roll p{
 	font-size: 1.8em;
 }
-table{
-}
 
 input[type=radio] {
     width: 100%;
@@ -164,7 +177,6 @@ input[type=radio] {
     background-color: none;
     text-align: center;
 }
-label[class=radio-inline]{
-    margin: 0 80px;
-    text-align: center;
+.radio-middle{
+    margin: 0 30% !important;
 }

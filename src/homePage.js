@@ -1,7 +1,9 @@
 import $ from 'jquery';
+import {BTNNAVS} from './data';
 
 function init(table){
 	disp(table);
+  on_mousedown();
 }
 
 function disp(table){
@@ -18,5 +20,15 @@ function disp(table){
 		$divButton.appendTo('#home .buttons');
 		$divButton = $('#home .button:first').clone();
 	}
+}
+function on_mousedown(){
+  $('#home .button').mousedown(function(){
+    let navId = this.id;
+
+		$('#home').addClass('disabled');
+		$('nav').removeClass('disabled');
+    BTNNAVS[navId].displayPage();
+
+  });
 }
 export{init};

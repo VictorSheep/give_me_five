@@ -26,8 +26,7 @@ function disp(table){
 function on_mousedown(){
   $('nav div').mousedown(function(){
     let navId = this.id;
-    console.log(navId);
-
+    
     for (var i=BTNNAVS.length-1; i>=0; i--) {
       let b = BTNNAVS[i];
       if(b.selected) b.hidePage();

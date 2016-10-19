@@ -7,7 +7,7 @@ function init(table){
 }
 
 function sortStudents(table){
-  let studentTable = table;
+  let studentTable = table.slice(0);
   let sortStudent = [];
   let sortStudentScore = [];
 
@@ -28,6 +28,7 @@ function sortStudents(table){
       }
     }
   }
+  console.log(table);
   return(sortStudent);
 }
 

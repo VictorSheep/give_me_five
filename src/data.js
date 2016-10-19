@@ -2,7 +2,7 @@ import Student from './student.class';
 import BtnNav from './btnNav.class';
 
 // Création de tous les étudiants
-let STUDENTS = [
+var STUDENTS = [
   new Student('Mathieu','Vandeville',50),
   new Student('Clément','Teboule',60,'img/clementteboul.JPG'),
   new Student('Victor','Moutton',30),

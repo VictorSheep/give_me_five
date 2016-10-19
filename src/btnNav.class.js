@@ -2,9 +2,9 @@ import $ from 'jquery';
 
 export default class{
 	constructor(name,iconPath,pageID){
-		this.name = name;
+		this.name     = name;
 		this.iconPath = iconPath;
-    this.pageID = pageID;
+    this.pageID   = pageID;
     this.selected = false;
 	}
   displayPage(){

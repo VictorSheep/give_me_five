@@ -7,6 +7,13 @@ import * as data from './data';
 
 function init()
 {
+  // Attribution des id aux instances de Student
+  for (var i = data.STUDENTS.length-1; i>=0; i--) {
+    let s = data.STUDENTS[i];
+    s.init(i);
+
+    console.log(s.id);
+  }
 	homePage.init(data.BTNNAVS);
 	rollPage.init(data.STUDENTS);
 	studentsPage.init(data.STUDENTS);
