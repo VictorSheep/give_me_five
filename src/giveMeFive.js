@@ -4,9 +4,11 @@ import * as rollPage from './rollPage';
 import * as menu from './menu';
 import * as studentsPage from './studentsPage';
 import * as data from './data';
+import moment from 'moment';
 
 function init()
 {
+  console.log(moment());
   // Attribution des id aux instances de Student
   for (var i = data.STUDENTS.length-1; i>=0; i--) {
     let s = data.STUDENTS[i];

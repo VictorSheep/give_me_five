@@ -10,6 +10,7 @@ function init(){
   clkOnProfilCardMin();
   clkOnIncreaseItem();
   clkOnDecreaseItem();
+  endInit();
 }
 
 function dispCardMin(){
@@ -144,5 +145,7 @@ function affStudentDetail(profilId){
   $divStudent.find('#names #firstname').text(s.firstname);
   $divStudent.find('#names #lastname').text(s.lastname);
 }
-
+function endInit(){
+  affStudentDetail(0);
+}
 export{init};
