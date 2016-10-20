@@ -1,16 +1,18 @@
 import $ from 'jquery';
 import {BTNNAVS} from './data';
+import {now} from './data';
 
-function init(table){
-  disp(table);
+function init(){
+  disp();
   on_mousedown();
 }
 
-function disp(table){
+function disp(){
+  console.log(now.format('LLLL'));
   let $divButton = $('nav .nav_button:first').detach(); // clone + remove
 
-  for (var i = 0; i < table.length; i++) {
-    let b = table[i];
+  for (var i = 0; i < BTNNAVS.length; i++) {
+    let b = BTNNAVS[i];
 
     $divButton.attr('title',b.firstname);
     $divButton.attr('id',i); // id pour lier interfaces / instances

@@ -10321,26 +10321,19 @@
 
 	var data = _interopRequireWildcard(_data);
 
-	var _moment = __webpack_require__(18);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function init() {
-	  console.log((0, _moment2.default)());
 	  // Attribution des id aux instances de Student
 	  for (var i = data.STUDENTS.length - 1; i >= 0; i--) {
 	    var s = data.STUDENTS[i];
 	    s.init(i);
 	  }
 	  homePage.init(data.BTNNAVS);
-	  rollPage.init(data.STUDENTS);
+	  rollPage.init();
 	  studentsPage.init();
 	  rankPage.init(data.STUDENTS);
-	  menu.init(data.BTNNAVS);
+	  menu.init();
 	}
 
 	exports.init = init;
@@ -10405,7 +10398,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.FEATURES = exports.BTNNAVS = exports.STUDENTS = undefined;
+	exports.now = exports.FEATURES = exports.BTNNAVS = exports.STUDENTS = undefined;
 
 	var _student = __webpack_require__(5);
 
@@ -10435,19 +10428,35 @@
 
 	var _tablePassage2 = _interopRequireDefault(_tablePassage);
 
+	var _moment = __webpack_require__(18);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Moment.js
+	_moment2.default.locale('fr');
+	var now;
+	function getNow() {
+	  exports.now = now = (0, _moment2.default)();
+	}
+	getNow();
+	setInterval(getNow, 1000);
 
 	// Création de tous les étudiants
 	var STUDENTS = [new _student2.default('Mathieu', 'Vendeville'), new _student2.default('Clément', 'Teboul', 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
 
+	// Création des 3 bouttons de navigation
 	var BTNNAVS = [new _btnNav2.default('Elèves', 'users', 'students'), new _btnNav2.default('Classement', 'list-ol', 'rank'), new _btnNav2.default('Appel', 'list-ul', 'roll')];
 
+	// Création des class correspondant aux carracteristiques des élèves
 	// A modifier ! (n'en faire qu'une seule classe)
 	var FEATURES = [new _attendance2.default(), new _lateness2.default(), new _absence2.default(), new _contribution2.default(), new _tablePassage2.default()];
 
 	exports.STUDENTS = STUDENTS;
 	exports.BTNNAVS = BTNNAVS;
 	exports.FEATURES = FEATURES;
+	exports.now = now;
 
 /***/ },
 /* 5 */
@@ -10521,6 +10530,10 @@
 	    }, {
 	        key: 'validRollState',
 	        value: function validRollState() {
+	            var att = this.attendance,
+	                lat = this.lateness,
+	                abs = this.absence;
+
 	            att.val += att.pre;
 	            lat.val += lat.pre;
 	            abs.val += abs.pre;
@@ -11050,17 +11063,22 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _data = __webpack_require__(4);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function init(table) {
-	  disp(table);
-	  clkOnRadioButton(table);
+	function init() {
+	  disp(_data.STUDENTS);
+	  clkOnRadioButton(_data.STUDENTS);
+	  dispDate();
+	  setInterval(validTime, 1000);
 	}
 
 	function disp(table) {
 
-	  var $trStudent = (0, _jquery2.default)('#roll td:first').parent().detach(); // clone + remove
+	  (0, _jquery2.default)('#roll .date').text(_data.now.format('LL'));
 
+	  var $trStudent = (0, _jquery2.default)('#roll td:first').parent().detach(); // clone + remove
 
 	  for (var i = 0; i < table.length; i++) {
 	    var s = table[i];
@@ -11086,6 +11104,24 @@
 	  });
 	}
 
+	function dispDate() {
+	  setTimeout(function () {
+	    (0, _jquery2.default)('#roll .date').text(_data.now.format('LL'));
+	    dispDate();
+	  }, 60000);
+	}
+
+	function validTime() {
+
+	  if ('13:00:00' == _data.now.format('LTS') || '17:00:00' == _data.now.format('LTS')) {
+	    console.log('Il est l\'heure !');
+	    for (var i = _data.STUDENTS.length - 1; i >= 0; i--) {
+	      var s = _data.STUDENTS[i];
+	      s.validRollState();
+	    }
+	  }
+	}
+
 	exports.init = init;
 
 /***/ },
@@ -11107,16 +11143,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function init(table) {
-	  disp(table);
+	function init() {
+	  disp();
 	  on_mousedown();
 	}
 
-	function disp(table) {
+	function disp() {
+	  console.log(_data.now.format('LLLL'));
 	  var $divButton = (0, _jquery2.default)('nav .nav_button:first').detach(); // clone + remove
 
-	  for (var i = 0; i < table.length; i++) {
-	    var b = table[i];
+	  for (var i = 0; i < _data.BTNNAVS.length; i++) {
+	    var b = _data.BTNNAVS[i];
 
 	    $divButton.attr('title', b.firstname);
 	    $divButton.attr('id', i); // id pour lier interfaces / instances

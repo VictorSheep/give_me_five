@@ -1,14 +1,19 @@
 import $ from 'jquery';
+import {now} from './data';
+import {STUDENTS} from './data';
 
-function init(table){
-  disp(table);
-  clkOnRadioButton(table);
+function init(){
+  disp(STUDENTS);
+  clkOnRadioButton(STUDENTS);
+  dispDate();
+  setInterval(validTime,1000);
 }
 
 function disp(table){
 
-  let $trStudent = $('#roll td:first').parent().detach(); // clone + remove
+  $('#roll .date').text(now.format('LL'));
 
+  let $trStudent = $('#roll td:first').parent().detach(); // clone + remove
 
   for (var i = 0; i < table.length; i++) {
     let s = table[i];
@@ -32,6 +37,25 @@ function clkOnRadioButton(table){
     table[sId].rollState = status;
     table[sId].updateRollScore();
   });
+}
+
+function dispDate(){
+  setTimeout(function(){
+    $('#roll .date').text(now.format('LL'));
+    dispDate();
+  },60000);
+}
+
+function validTime(){
+
+  if( '13:00:00'==(now.format('LTS'))
+    ||'17:00:00'==(now.format('LTS'))){
+    console.log('Il est l\'heure !');
+    for (var i = STUDENTS.length - 1; i >= 0; i--) {
+      let s=STUDENTS[i];
+      s.validRollState();
+    }
+  }
 }
 
 export{init};

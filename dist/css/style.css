@@ -9,6 +9,15 @@ body{
 a:hover{
 	text-decoration: none;
 }
+.title_page{
+  display: inline;
+  float: right;
+  margin: -0.4em -2% 0 0;
+  color: #eee;
+  z-index: -1;
+  font-size: 10em !important;
+}
+
 /*divers*/
 .center{margin:auto auto;}
 .tl_radius {border-top-left-radius: 5px;}
@@ -44,6 +53,7 @@ h6{font-size:1.4em;}
 .h_40  { height:  40px  ; }
 .h_50  { height:  50px  ; }
 .h_100 { height: 100px  ; }
+.h_150 { height: 150px  ; }
 .h_200 { height: 200px  ; }
 .h_300 { height: 300px  ; }
 .h_400 { height: 400px  ; }
@@ -121,13 +131,14 @@ nav .nav_button:hover{
   margin-top: 100px;
   margin-bottom: 8%;
 }
-#home .button:hover i,
 #home .button:hover p{
   color: #333;
+  font-weight: 700;
 }
 #home .button:hover i{
+  color: #333;
   border: 3px solid #333;
-  background-color: #fff;
+  background-color: #fcfcfc;
 }
 
 /************/

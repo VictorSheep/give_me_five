@@ -49,6 +49,10 @@ constructor(firstname,lastname,profilImagePath){
         this.updateScore();
     }
     validRollState(){
+        let att = this.attendance,
+            lat = this.lateness,
+            abs = this.absence;
+            
         att.val += att.pre;
         lat.val += lat.pre;
         abs.val += abs.pre;
