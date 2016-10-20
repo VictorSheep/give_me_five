@@ -10508,14 +10508,17 @@
 	                    lat.pre = 0; // nb retard
 	                    abs.pre = 0; // nb absence
 	            }
+	            this.updateScore();
+	        }
+	    }, {
+	        key: 'validRollState',
+	        value: function validRollState() {
 	            att.val += att.pre;
 	            lat.val += lat.pre;
 	            abs.val += abs.pre;
 	            att.pre = 0;
 	            lat.pre = 0;
 	            abs.pre = 0;
-
-	            this.updateScore();
 	        }
 	    }, {
 	        key: 'updateScore',

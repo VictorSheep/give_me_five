@@ -3,7 +3,7 @@
 body{
 	background-image: url('../img/square_wallpaper.png');
 	background-size: 110px 55px;
-	overflow: hidden;
+	/*overflow: hidden;*/
   background-color: #fbfbfb;
 }
 a:hover{
