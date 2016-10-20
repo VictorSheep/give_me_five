@@ -1,8 +1,9 @@
 export default class{
-  constructor(name,title,iconFa,color){
+  constructor(name,title,iconFa,roll,color){
     this.name    = name;
     this.title   = title;
     this.iconFa  = iconFa;
+    this.roll    = roll;
     this.color   = color || 'black';
   }
   toFaClass(){

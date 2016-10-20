@@ -1,7 +1,7 @@
 import Feature from './feature.class';
 export default class extends Feature{
   constructor(){
-    super('absence','Absence', 'times','orange');
+    super('absence','Absence','times',true,'orange');
   }
   // ajoute un point dans absence à un student
   // s : instance de Student

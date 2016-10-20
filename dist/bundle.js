@@ -10613,7 +10613,7 @@
 	  function _class() {
 	    _classCallCheck(this, _class);
 
-	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'attendance', 'Présence', 'check', 'blue'));
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'attendance', 'Présence', 'check', true, 'blue'));
 	  }
 	  // ajoute un point dans attendance à un student
 	  // s : instance de Student
@@ -10654,12 +10654,13 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var _class = function () {
-	  function _class(name, title, iconFa, color) {
+	  function _class(name, title, iconFa, roll, color) {
 	    _classCallCheck(this, _class);
 
 	    this.name = name;
 	    this.title = title;
 	    this.iconFa = iconFa;
+	    this.roll = roll;
 	    this.color = color || 'black';
 	  }
 
@@ -10707,7 +10708,7 @@
 	  function _class() {
 	    _classCallCheck(this, _class);
 
-	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'lateness', 'Retard', 'clock-o'));
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'lateness', 'Retard', 'clock-o', true));
 	  }
 	  // ajoute un point dans lateness à un student
 	  // s : instance de Student
@@ -10763,7 +10764,7 @@
 	  function _class() {
 	    _classCallCheck(this, _class);
 
-	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'absence', 'Absence', 'times', 'orange'));
+	    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'absence', 'Absence', 'times', true, 'orange'));
 	  }
 	  // ajoute un point dans absence à un student
 	  // s : instance de Student
@@ -11194,12 +11195,21 @@
 	    $divFeatNb.addClass(f.color);
 	    $divFeatNb = (0, _jquery2.default)('#students #rating h5:first').clone();
 
-	    $divFeatInc.attr('title', f.title);
-	    $divFeatInc.attr('id', i);
+	    // increase et decrease boutons
+	    if (f.roll) {
+	      $divFeatInc.html('<br/>');
+	      $divFeatDec.html('<br/>');
+	    } else {
+	      $divFeatInc.attr('title', f.title);
+	      $divFeatInc.attr('id', i);
+	      $divFeatInc.html('<i class="button fa fa-plus" aria-hidden="true"></i>');
+
+	      $divFeatDec.attr('title', f.title);
+	      $divFeatDec.attr('id', i);
+	      $divFeatDec.html('<i class="button fa fa-minus" aria-hidden="true"></i>');
+	    }
 	    $divFeatInc.appendTo('#students #increase');
 	    $divFeatInc = (0, _jquery2.default)('#students #increase').children().eq(0).clone();
-	    $divFeatDec.attr('title', f.title);
-	    $divFeatDec.attr('id', i);
 	    $divFeatDec.appendTo('#students #decrease');
 	    $divFeatDec = (0, _jquery2.default)('#students #decrease').children().eq(0).clone();
 	  }

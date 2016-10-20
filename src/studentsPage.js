@@ -61,14 +61,27 @@ function dispFeatures(){
     $divFeatNb.addClass(f.color);
     $divFeatNb    = $('#students #rating h5:first').clone();
 
-    $divFeatInc.attr('title',f.title);
-    $divFeatInc.attr('id',i);
+    // increase et decrease boutons
+    if(f.roll)
+    {
+      $divFeatInc.html('<br/>');
+      $divFeatDec.html('<br/>');
+    }
+    else
+    {
+      $divFeatInc.attr('title',f.title);
+      $divFeatInc.attr('id',i);
+      $divFeatInc.html('<i class="button fa fa-plus" aria-hidden="true"></i>');
+
+      $divFeatDec.attr('title',f.title);
+      $divFeatDec.attr('id',i);
+      $divFeatDec.html('<i class="button fa fa-minus" aria-hidden="true"></i>');
+    }
     $divFeatInc.appendTo('#students #increase');
     $divFeatInc   = $('#students #increase').children().eq(0).clone();
-    $divFeatDec.attr('title',f.title);
-    $divFeatDec.attr('id',i);
     $divFeatDec.appendTo('#students #decrease');
     $divFeatDec   = $('#students #decrease').children().eq(0).clone();
+    
   }
 }
 
