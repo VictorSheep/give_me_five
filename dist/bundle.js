@@ -10370,7 +10370,8 @@
 
 			$divButton.attr('title', b.firstname);
 			$divButton.attr('id', i); // id pour lier interfaces / instances
-			$divButton.find('img').attr('src', b.iconPath);
+			$divButton.find('i').removeClass();
+			$divButton.find('i').addClass(b.toFaClass());
 			$divButton.find('p').empty();
 			$divButton.find('p').text(b.name);
 			$divButton.appendTo('#home .buttons');
@@ -10432,7 +10433,7 @@
 	// Création de tous les étudiants
 	var STUDENTS = [new _student2.default('Mathieu', 'Vendeville'), new _student2.default('Clément', 'Teboul', 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
 
-	var BTNNAVS = [new _btnNav2.default('Elève', 'img/eleves.jpg', 'students'), new _btnNav2.default('Classement', 'img/podium.jpg', 'rank'), new _btnNav2.default('Appel', 'img/liste.png', 'roll')];
+	var BTNNAVS = [new _btnNav2.default('Elèves', 'users', 'students'), new _btnNav2.default('Classement', 'list-ol', 'rank'), new _btnNav2.default('Appel', 'list-ul', 'roll')];
 
 	// A modifier ! (n'en faire qu'une seule classe)
 	var FEATURES = [new _attendance2.default(), new _lateness2.default(), new _absence2.default(), new _contribution2.default(), new _tablePassage2.default()];
@@ -10574,11 +10575,11 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var _class = function () {
-	  function _class(name, iconPath, pageID) {
+	  function _class(name, iconFa, pageID) {
 	    _classCallCheck(this, _class);
 
 	    this.name = name;
-	    this.iconPath = iconPath;
+	    this.iconFa = iconFa;
 	    this.pageID = pageID;
 	    this.selected = false;
 	  }
@@ -10594,6 +10595,14 @@
 	    value: function hidePage() {
 	      (0, _jquery2.default)('#' + this.pageID).addClass('disabled');
 	      this.selected = false;
+	    }
+	  }, {
+	    key: 'toFaClass',
+	    value: function toFaClass() {
+	      var divfa = 'fa fa-';
+	      divfa += this.iconFa;
+	      divfa += ' fa-5x';
+	      return divfa;
 	    }
 	  }]);
 

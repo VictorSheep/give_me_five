@@ -1,9 +1,9 @@
 import $ from 'jquery';
 
 export default class{
-	constructor(name,iconPath,pageID){
+	constructor(name,iconFa,pageID){
 		this.name     = name;
-		this.iconPath = iconPath;
+		this.iconFa   = iconFa;
     this.pageID   = pageID;
     this.selected = false;
 	}
@@ -14,5 +14,11 @@ export default class{
   hidePage(){
     $('#'+this.pageID).addClass('disabled');
     this.selected = false;
+  }
+  toFaClass(){
+    let divfa = 'fa fa-';
+    divfa += this.iconFa;
+    divfa += ' fa-5x';
+    return(divfa);
   }
 }

@@ -18,9 +18,9 @@ var STUDENTS = [
 ];
 
 let BTNNAVS = [
-	new BtnNav('Elève','img/eleves.jpg','students'),
-	new BtnNav('Classement','img/podium.jpg','rank'),
-	new BtnNav('Appel','img/liste.png','roll')
+	new BtnNav('Elèves','users','students'),
+	new BtnNav('Classement','list-ol','rank'),
+	new BtnNav('Appel','list-ul','roll')
 ];
 
 // A modifier ! (n'en faire qu'une seule classe)

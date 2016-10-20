@@ -13,8 +13,9 @@ function disp(table){
 		let b = table[i];
 
 		$divButton.attr('title',b.firstname);
-	    $divButton.attr('id',i); // id pour lier interfaces / instances
-		$divButton.find('img').attr('src',b.iconPath);
+	  $divButton.attr('id',i); // id pour lier interfaces / instances
+		$divButton.find('i').removeClass();
+    $divButton.find('i').addClass(b.toFaClass())
 		$divButton.find('p').empty();
 		$divButton.find('p').text(b.name);
 		$divButton.appendTo('#home .buttons');
