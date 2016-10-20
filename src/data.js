@@ -18,12 +18,18 @@ setInterval(getNow,1000);
 
 // Création de tous les étudiants
 let STUDENTS = [
-  new Student('Mathieu','Vendeville'),
-  new Student('Clément','Teboul','img/clementteboul.JPG'),
-  new Student('Victor','Moutton'),
-  new Student('Félix','Nahon'),
-  new Student('Clément','Dussol'),
-	new Student('Joel','Alves Canteiro')
+  new Student('Joel','Alves Canteiro','img/joelalvescanteiro.jpg'),
+  new Student('Loan','Campan','img/loancampan.jpg'),
+  new Student('Axel','Cqn','img/axelcqn.jpg'),
+  new Student('Clément','Dussol','img/clementdussol.jpg'),
+  new Student('Julien','Gastineau','img/juliengastineau.jpg'),
+  new Student('Bastien','Luhaire','img/bastienluhaire.jpg'),
+  new Student('Victor','Moutton','img/victormoutton.jpg'),
+  new Student('Félix','Nahon','img/felixnahon.jpg'),
+  new Student('Pierre','Saigot','img/pierresaigot.jpg'),
+  new Student('Clément','Teboul','img/clementteboul.jpg'),
+  new Student('Mathieu','Vendeville','img/mathieuvendeville.jpg'),
+  new Student('Stan','Xiong','img/stanxiong.jpg')
 ];
 
 // Création des 3 bouttons de navigation

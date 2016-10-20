@@ -52,7 +52,7 @@ constructor(firstname,lastname,profilImagePath){
         let att = this.attendance,
             lat = this.lateness,
             abs = this.absence;
-            
+
         att.val += att.pre;
         lat.val += lat.pre;
         abs.val += abs.pre;
@@ -68,11 +68,8 @@ constructor(firstname,lastname,profilImagePath){
             con = this.contribution.val,
             tab = this.tablePassage.val;
 
-        if(att<0) att=0;
-        if(lat<0) lat=0;
-        if(abs<0) abs=0;
-        if(con<0) con=0;
-        if(tab<0) tab=0;
+        if(con<0) this.contribution.val=0;
+        if(tab<0) this.tablePassage.val=0;
         
         s += att*10;
         s += lat*(-2);

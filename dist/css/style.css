@@ -145,7 +145,8 @@ nav .nav_button:hover{
 /* Students */
 .list_profil_card{
   overflow-y: scroll;
-  max-height: 820px;
+  min-height: 750px;
+  max-height: 750px;
 }
 .profil_card_min{
   overflow: hidden;

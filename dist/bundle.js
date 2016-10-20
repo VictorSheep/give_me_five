@@ -10444,7 +10444,7 @@
 	setInterval(getNow, 1000);
 
 	// Création de tous les étudiants
-	var STUDENTS = [new _student2.default('Mathieu', 'Vendeville'), new _student2.default('Clément', 'Teboul', 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
+	var STUDENTS = [new _student2.default('Joel', 'Alves Canteiro', 'img/joelalvescanteiro.jpg'), new _student2.default('Loan', 'Campan', 'img/loancampan.jpg'), new _student2.default('Axel', 'Cqn', 'img/axelcqn.jpg'), new _student2.default('Clément', 'Dussol', 'img/clementdussol.jpg'), new _student2.default('Julien', 'Gastineau', 'img/juliengastineau.jpg'), new _student2.default('Bastien', 'Luhaire', 'img/bastienluhaire.jpg'), new _student2.default('Victor', 'Moutton', 'img/victormoutton.jpg'), new _student2.default('Félix', 'Nahon', 'img/felixnahon.jpg'), new _student2.default('Pierre', 'Saigot', 'img/pierresaigot.jpg'), new _student2.default('Clément', 'Teboul', 'img/clementteboul.jpg'), new _student2.default('Mathieu', 'Vendeville', 'img/mathieuvendeville.jpg'), new _student2.default('Stan', 'Xiong', 'img/stanxiong.jpg')];
 
 	// Création des 3 bouttons de navigation
 	var BTNNAVS = [new _btnNav2.default('Elèves', 'users', 'students'), new _btnNav2.default('Classement', 'list-ol', 'rank'), new _btnNav2.default('Appel', 'list-ul', 'roll')];
@@ -10551,11 +10551,8 @@
 	                con = this.contribution.val,
 	                tab = this.tablePassage.val;
 
-	            if (att < 0) att = 0;
-	            if (lat < 0) lat = 0;
-	            if (abs < 0) abs = 0;
-	            if (con < 0) con = 0;
-	            if (tab < 0) tab = 0;
+	            if (con < 0) this.contribution.val = 0;
+	            if (tab < 0) this.tablePassage.val = 0;
 
 	            s += att * 10;
 	            s += lat * -2;
