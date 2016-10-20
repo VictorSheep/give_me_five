@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import * as homePage from './homePage';
+import * as rankPage from './rankPage';
 import {STUDENTS} from './data';
 import {FEATURES} from './data';
 
@@ -78,7 +80,7 @@ function clkOnIncreaseItem(){
     let f = FEATURES[featurID];
     f.addPoint(s);
     s.updateScore();
-    
+    rankPage.init(STUDENTS);    
     affStudentDetail(profilId);
   });
 }
@@ -97,7 +99,7 @@ function clkOnDecreaseItem(){
 }
 
 function clkOnProfilCardMin(){
-  $('#students .profil_card_min').mousedown(function(){
+  $('#students').on('mousedown','.profil_card_min',function(){
     let profilId = this.id;
     affStudentDetail(profilId);
   });

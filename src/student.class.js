@@ -1,13 +1,16 @@
 export default class{
-constructor(firstname,lastname,score,profilImagePath){
+constructor(firstname,lastname,profilImagePath){
     this.id = null;
     this.firstname         = firstname;
     this.lastname          = lastname;
     this.profilImagePath   = profilImagePath || 'img/eleves.jpg';
     
+    this.rollState    = '';
+
     this.attendance   = 0; // nb présence
     this.lateness     = 0; // nb retard
     this.absence      = 0; // nb absence
+
     this.contribution = 0; // nb contribution
     this.tablePassage = 0; // score passage au tableau
     this.score        = 0; // score total
@@ -15,6 +18,31 @@ constructor(firstname,lastname,score,profilImagePath){
 
     init(id){
         this.id = id;
+    }
+
+    updateRollScore(){
+        switch(this.rollState) {
+            case 'attendance':
+                this.attendance   = 1; // nb présence
+                this.lateness     = 0; // nb retard
+                this.absence      = 0; // nb absence
+                break;
+            case 'lateness':
+                this.attendance   = 0; // nb présence
+                this.lateness     = 1; // nb retard
+                this.absence      = 0; // nb absence
+                break;
+            case 'absence':
+                this.attendance   = 0; // nb présence
+                this.lateness     = 0; // nb retard
+                this.absence      = 1; // nb absence
+                break;
+            default:
+                this.attendance   = 0; // nb présence
+                this.lateness     = 0; // nb retard
+                this.absence      = 0; // nb absence
+        }
+        this.updateScore();
     }
 
     updateScore(){

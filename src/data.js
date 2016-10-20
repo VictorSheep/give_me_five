@@ -9,12 +9,12 @@ import TablePassage from './tablePassage.class';
 
 // Création de tous les étudiants
 var STUDENTS = [
-  new Student('Mathieu','Vandeville',50),
-  new Student('Clément','Teboule',60,'img/clementteboul.JPG'),
-  new Student('Victor','Moutton',30),
-  new Student('Félix','Nahon',40),
-  new Student('Clément','Dussol',5),
-	new Student('Joel','Alves Canteiro',60)
+  new Student('Mathieu','Vendeville'),
+  new Student('Clément','Teboul','img/clementteboul.JPG'),
+  new Student('Victor','Moutton'),
+  new Student('Félix','Nahon'),
+  new Student('Clément','Dussol'),
+	new Student('Joel','Alves Canteiro')
 ];
 
 let BTNNAVS = [
@@ -23,6 +23,7 @@ let BTNNAVS = [
 	new BtnNav('appel','img/liste.png','roll')
 ];
 
+// A modifier ! (n'en faire qu'une seule classe)
 let FEATURES = [
   new Attendance(),
   new Lateness(),

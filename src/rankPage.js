@@ -28,21 +28,23 @@ function sortStudents(table){
       }
     }
   }
-  console.log(table);
   return(sortStudent);
 }
 
 function disp(table){
 
-  let r = 0; // rank
-  let $divStudent = $('#rank td:first').parent().detach(); // clone + remove
-  
+  let r   = 0, // rank
+      sp  = null,
+      s   = null;
+  let $divStudent = $('#rank td:first').parent().clone();
+  $('#rank tbody').children().empty();
   for (var i = 0; i < table.length; i++) {
-    let s = table[i]; // student
-    let sp = $divStudent.children().eq(1).text(); // score précédent
-    
+    s = table[i]; // student
+
     // on incrémente le rank seulement si le score
     // est différent du précédent
+    //console.log('s = '+s.score);
+    //console.log(sp);
     if(s.score!=sp) r++;
 
     $divStudent.attr('title',s.firstname);
@@ -56,6 +58,8 @@ function disp(table){
     $divStudent.children().eq(3).text(s.firstname);
     $divStudent.appendTo('#rank tbody');
     $divStudent = $('#rank td:first').parent().clone();
+
+    sp = s.score; // score précédent
 
   }
 }

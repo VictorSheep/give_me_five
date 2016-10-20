@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 function init(table){
   disp(table);
+  clkOnRadioButton(table);
 }
 
 function disp(table){
@@ -20,7 +21,17 @@ function disp(table){
     $trStudent.children().eq(1).text(s.firstname);
     $trStudent.appendTo('#roll tbody');
     $trStudent = $('#roll td:first').parent().clone();
-  } 
+  }
+}
+
+function clkOnRadioButton(table){
+  $('#roll').on('mousedown','input[type=radio]',function(){
+    var sId = $(this).parents('tr').attr('id');
+    var status = this.id;
+
+    table[sId].rollState = status;
+    table[sId].updateRollScore();
+  });
 }
 
 export{init};
