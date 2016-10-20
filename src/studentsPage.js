@@ -131,11 +131,11 @@ function affStudentDetail(profilId){
   $divStudent.find('.flag').attr('id',profilId);
 
   $divStudent.find('#rating').children().empty();
-  $divStudent.find('#rating #attendance').text(s.attendance);
-  $divStudent.find('#rating #lateness').text(s.lateness);
-  $divStudent.find('#rating #absence').text(s.absence);
-  $divStudent.find('#rating #contribution').text(s.contribution);
-  $divStudent.find('#rating #table_passage').text(s.tablePassage);
+  $divStudent.find('#rating #attendance').text(s.attendance.val);
+  $divStudent.find('#rating #lateness').text(s.lateness.val);
+  $divStudent.find('#rating #absence').text(s.absence.val);
+  $divStudent.find('#rating #contribution').text(s.contribution.val);
+  $divStudent.find('#rating #table_passage').text(s.tablePassage.val);
 
   $divStudent.find('#pcd_score').empty();
   $divStudent.find('#pcd_score').text(s.score);

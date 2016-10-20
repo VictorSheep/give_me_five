@@ -10432,7 +10432,7 @@
 	// Création de tous les étudiants
 	var STUDENTS = [new _student2.default('Mathieu', 'Vendeville'), new _student2.default('Clément', 'Teboul', 'img/clementteboul.JPG'), new _student2.default('Victor', 'Moutton'), new _student2.default('Félix', 'Nahon'), new _student2.default('Clément', 'Dussol'), new _student2.default('Joel', 'Alves Canteiro')];
 
-	var BTNNAVS = [new _btnNav2.default('élève', 'img/eleves.jpg', 'students'), new _btnNav2.default('classement', 'img/podium.jpg', 'rank'), new _btnNav2.default('appel', 'img/liste.png', 'roll')];
+	var BTNNAVS = [new _btnNav2.default('Elève', 'img/eleves.jpg', 'students'), new _btnNav2.default('Classement', 'img/podium.jpg', 'rank'), new _btnNav2.default('Appel', 'img/liste.png', 'roll')];
 
 	// A modifier ! (n'en faire qu'une seule classe)
 	var FEATURES = [new _attendance2.default(), new _lateness2.default(), new _absence2.default(), new _contribution2.default(), new _tablePassage2.default()];
@@ -10466,12 +10466,12 @@
 
 	        this.rollState = '';
 
-	        this.attendance = 0; // nb présence
-	        this.lateness = 0; // nb retard
-	        this.absence = 0; // nb absence
+	        this.attendance = { pre: 0, val: 0 }; // nb présence
+	        this.lateness = { pre: 0, val: 0 }; // nb retard
+	        this.absence = { pre: 0, val: 0 }; // nb absence
 
-	        this.contribution = 0; // nb contribution
-	        this.tablePassage = 0; // score passage au tableau
+	        this.contribution = { pre: 0, val: 0 }; // nb contribution
+	        this.tablePassage = { pre: 0, val: 0 }; // score passage au tableau
 	        this.score = 0; // score total
 	    }
 
@@ -10483,45 +10483,61 @@
 	    }, {
 	        key: 'updateRollScore',
 	        value: function updateRollScore() {
+	            var att = this.attendance,
+	                lat = this.lateness,
+	                abs = this.absence;
+
 	            switch (this.rollState) {
 	                case 'attendance':
-	                    this.attendance = 1; // nb présence
-	                    this.lateness = 0; // nb retard
-	                    this.absence = 0; // nb absence
+	                    att.pre = 1; // nb présence
+	                    lat.pre = 0; // nb retard
+	                    abs.pre = 0; // nb absence
 	                    break;
 	                case 'lateness':
-	                    this.attendance = 0; // nb présence
-	                    this.lateness = 1; // nb retard
-	                    this.absence = 0; // nb absence
+	                    att.pre = 0; // nb présence
+	                    lat.pre = 1; // nb retard
+	                    abs.pre = 0; // nb absence
 	                    break;
 	                case 'absence':
-	                    this.attendance = 0; // nb présence
-	                    this.lateness = 0; // nb retard
-	                    this.absence = 1; // nb absence
+	                    att.pre = 0; // nb présence
+	                    lat.pre = 0; // nb retard
+	                    abs.pre = 1; // nb absence
 	                    break;
 	                default:
-	                    this.attendance = 0; // nb présence
-	                    this.lateness = 0; // nb retard
-	                    this.absence = 0; // nb absence
+	                    att.pre = 0; // nb présence
+	                    lat.pre = 0; // nb retard
+	                    abs.pre = 0; // nb absence
 	            }
+	            att.val += att.pre;
+	            lat.val += lat.pre;
+	            abs.val += abs.pre;
+	            att.pre = 0;
+	            lat.pre = 0;
+	            abs.pre = 0;
+
 	            this.updateScore();
 	        }
 	    }, {
 	        key: 'updateScore',
 	        value: function updateScore() {
-	            var s = 0;
+	            var s = 0,
+	                att = this.attendance.val,
+	                lat = this.lateness.val,
+	                abs = this.absence.val,
+	                con = this.contribution.val,
+	                tab = this.tablePassage.val;
 
-	            if (this.attendance < 0) this.attendance = 0;
-	            if (this.lateness < 0) this.lateness = 0;
-	            if (this.absence < 0) this.absence = 0;
-	            if (this.contribution < 0) this.contribution = 0;
-	            if (this.tablePassage < 0) this.tablePassage = 0;
+	            if (att < 0) att = 0;
+	            if (lat < 0) lat = 0;
+	            if (abs < 0) abs = 0;
+	            if (con < 0) con = 0;
+	            if (tab < 0) tab = 0;
 
-	            s += this.attendance * 10;
-	            s += this.lateness * -2;
-	            s += this.absence * -10;
-	            s += this.contribution * 2;
-	            s += this.tablePassage * 5;
+	            s += att * 10;
+	            s += lat * -2;
+	            s += abs * -10;
+	            s += con * 2;
+	            s += tab * 5;
 
 	            if (s < 0) s = 0;
 
@@ -10622,7 +10638,7 @@
 	  _createClass(_class, [{
 	    key: 'addPoint',
 	    value: function addPoint(s) {
-	      s.attendance++;
+	      s.attendance.val++;
 	    }
 	    // retire un point dans attendance à un student
 	    // s : instance de Student
@@ -10630,7 +10646,7 @@
 	  }, {
 	    key: 'removePoint',
 	    value: function removePoint(s) {
-	      s.attendance--;
+	      s.attendance.val--;
 	    }
 	  }]);
 
@@ -10717,7 +10733,7 @@
 	  _createClass(_class, [{
 	    key: 'addPoint',
 	    value: function addPoint(s) {
-	      s.lateness++;
+	      s.lateness.val++;
 	    }
 	    // retire un point dans lateness à un student
 	    // s : instance de Student
@@ -10725,7 +10741,7 @@
 	  }, {
 	    key: 'removePoint',
 	    value: function removePoint(s) {
-	      s.lateness--;
+	      s.lateness.val--;
 	    }
 	  }]);
 
@@ -10773,7 +10789,7 @@
 	  _createClass(_class, [{
 	    key: 'addPoint',
 	    value: function addPoint(s) {
-	      s.absence++;
+	      s.absence.val++;
 	    }
 	    // retire un point dans absence à un student
 	    // s : instance de Student
@@ -10781,7 +10797,7 @@
 	  }, {
 	    key: 'removePoint',
 	    value: function removePoint(s) {
-	      s.absence--;
+	      s.absence.val--;
 	    }
 	  }]);
 
@@ -10829,7 +10845,7 @@
 	  _createClass(_class, [{
 	    key: 'addPoint',
 	    value: function addPoint(s) {
-	      s.contribution++;
+	      s.contribution.val++;
 	    }
 	    // retire un point dans contribution à un student
 	    // s : instance de Student
@@ -10837,7 +10853,7 @@
 	  }, {
 	    key: 'removePoint',
 	    value: function removePoint(s) {
-	      s.contribution--;
+	      s.contribution.val--;
 	    }
 	  }]);
 
@@ -10885,7 +10901,7 @@
 	  _createClass(_class, [{
 	    key: 'addPoint',
 	    value: function addPoint(s) {
-	      s.tablePassage++;
+	      s.tablePassage.val++;
 	    }
 	    // retire un point dans tablePassage à un student
 	    // s : instance de Student
@@ -10893,7 +10909,7 @@
 	  }, {
 	    key: 'removePoint',
 	    value: function removePoint(s) {
-	      s.tablePassage--;
+	      s.tablePassage.val--;
 	    }
 	  }]);
 
@@ -11078,19 +11094,17 @@
 	}
 
 	function disp(table) {
-	  var $divButton = (0, _jquery2.default)('nav div:first').detach(); // clone + remove
+	  var $divButton = (0, _jquery2.default)('nav .nav_button:first').detach(); // clone + remove
 
 	  for (var i = 0; i < table.length; i++) {
 	    var b = table[i];
 
 	    $divButton.attr('title', b.firstname);
 	    $divButton.attr('id', i); // id pour lier interfaces / instances
-	    $divButton.find('img').attr('src', b.iconPath);
-	    $divButton.find('p').empty();
-	    $divButton.find('p').text(b.name);
-	    if (i == table.length - 1) $divButton.addClass('br_radius');
+	    $divButton.find('h6').empty();
+	    $divButton.find('h6').text(b.name);
 	    $divButton.appendTo('nav');
-	    $divButton = (0, _jquery2.default)('nav div:first').clone();
+	    $divButton = (0, _jquery2.default)('nav .nav_button:first').clone();
 	  }
 	}
 
@@ -11261,11 +11275,11 @@
 	  $divStudent.find('.flag').attr('id', profilId);
 
 	  $divStudent.find('#rating').children().empty();
-	  $divStudent.find('#rating #attendance').text(s.attendance);
-	  $divStudent.find('#rating #lateness').text(s.lateness);
-	  $divStudent.find('#rating #absence').text(s.absence);
-	  $divStudent.find('#rating #contribution').text(s.contribution);
-	  $divStudent.find('#rating #table_passage').text(s.tablePassage);
+	  $divStudent.find('#rating #attendance').text(s.attendance.val);
+	  $divStudent.find('#rating #lateness').text(s.lateness.val);
+	  $divStudent.find('#rating #absence').text(s.absence.val);
+	  $divStudent.find('#rating #contribution').text(s.contribution.val);
+	  $divStudent.find('#rating #table_passage').text(s.tablePassage.val);
 
 	  $divStudent.find('#pcd_score').empty();
 	  $divStudent.find('#pcd_score').text(s.score);

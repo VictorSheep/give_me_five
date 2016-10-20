@@ -6,11 +6,11 @@ export default class extends Feature{
   // ajoute un point dans attendance à un student
   // s : instance de Student
   addPoint(s){
-    s.attendance ++;
+    s.attendance.val ++;
   }
   // retire un point dans attendance à un student
   // s : instance de Student
   removePoint(s){
-    s.attendance --;
+    s.attendance.val --;
   }
 }

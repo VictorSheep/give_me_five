@@ -7,12 +7,12 @@ constructor(firstname,lastname,profilImagePath){
     
     this.rollState    = '';
 
-    this.attendance   = 0; // nb présence
-    this.lateness     = 0; // nb retard
-    this.absence      = 0; // nb absence
+    this.attendance   = {pre:0,val:0}; // nb présence
+    this.lateness     = {pre:0,val:0}; // nb retard
+    this.absence      = {pre:0,val:0}; // nb absence
 
-    this.contribution = 0; // nb contribution
-    this.tablePassage = 0; // score passage au tableau
+    this.contribution = {pre:0,val:0}; // nb contribution
+    this.tablePassage = {pre:0,val:0}; // score passage au tableau
     this.score        = 0; // score total
     }
 
@@ -21,44 +21,60 @@ constructor(firstname,lastname,profilImagePath){
     }
 
     updateRollScore(){
+        let att = this.attendance,
+            lat = this.lateness,
+            abs = this.absence;
+
         switch(this.rollState) {
             case 'attendance':
-                this.attendance   = 1; // nb présence
-                this.lateness     = 0; // nb retard
-                this.absence      = 0; // nb absence
+                att.pre   = 1; // nb présence
+                lat.pre   = 0; // nb retard
+                abs.pre   = 0; // nb absence
                 break;
             case 'lateness':
-                this.attendance   = 0; // nb présence
-                this.lateness     = 1; // nb retard
-                this.absence      = 0; // nb absence
+                att.pre   = 0; // nb présence
+                lat.pre   = 1; // nb retard
+                abs.pre   = 0; // nb absence
                 break;
             case 'absence':
-                this.attendance   = 0; // nb présence
-                this.lateness     = 0; // nb retard
-                this.absence      = 1; // nb absence
+                att.pre   = 0; // nb présence
+                lat.pre   = 0; // nb retard
+                abs.pre   = 1; // nb absence
                 break;
             default:
-                this.attendance   = 0; // nb présence
-                this.lateness     = 0; // nb retard
-                this.absence      = 0; // nb absence
+                att.pre   = 0; // nb présence
+                lat.pre   = 0; // nb retard
+                abs.pre   = 0; // nb absence
         }
+        att.val += att.pre;
+        lat.val += lat.pre;
+        abs.val += abs.pre;
+        att.pre  = 0;
+        lat.pre  = 0;
+        abs.pre  = 0;
+
         this.updateScore();
     }
 
     updateScore(){
-        let s = 0;
+        let   s = 0,
+            att = this.attendance.val,
+            lat = this.lateness.val,
+            abs = this.absence.val,
+            con = this.contribution.val,
+            tab = this.tablePassage.val;
 
-        if(this.attendance<0)   this.attendance=0;
-        if(this.lateness<0)     this.lateness=0;
-        if(this.absence<0)      this.absence=0;
-        if(this.contribution<0) this.contribution=0;
-        if(this.tablePassage<0) this.tablePassage=0;
+        if(att<0) att=0;
+        if(lat<0) lat=0;
+        if(abs<0) abs=0;
+        if(con<0) con=0;
+        if(tab<0) tab=0;
         
-        s += this.attendance*10;
-        s += this.lateness*(-2);
-        s += this.absence*(-10);
-        s += this.contribution*2;
-        s += this.tablePassage*5;
+        s += att*10;
+        s += lat*(-2);
+        s += abs*(-10);
+        s += con*2;
+        s += tab*5;
 
         if(s<0) s=0;
 
