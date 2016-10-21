@@ -25487,7 +25487,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var rollEnd = null;
+	var rollEnd = null; //objet(moment.js) correspondan à l'heure de fin de l'appel
 
 	function init() {
 	  disp(_data.STUDENTS);
@@ -25558,7 +25558,7 @@
 	      limit2 = (0, _moment2.default)(_data.now);
 
 	  limit1 = (0, _moment2.default)(limit1.hour(13).minute(0).second(0)); //Aujourd'hui à 13h00
-	  limit2 = (0, _moment2.default)(limit2.hour(16).minute(36).second(0)); //Aujourd'hui à 17h00
+	  limit2 = (0, _moment2.default)(limit2.hour(17).minute(0).second(0)); //Aujourd'hui à 17h00
 
 	  if ((0, _moment2.default)(rollMoment).isBefore(limit1)) {
 	    console.log('matin');
@@ -25752,6 +25752,7 @@
 	  }
 	}
 
+	// au clique sur le symbole plus
 	function clkOnIncreaseItem() {
 	  (0, _jquery2.default)('#students #increase').children().mousedown(function () {
 	    var profilId = (0, _jquery2.default)('#students .flag').attr('id');
@@ -25767,6 +25768,7 @@
 	  });
 	}
 
+	// au clique sur le symbole moins
 	function clkOnDecreaseItem() {
 	  (0, _jquery2.default)('#students #decrease').children().mousedown(function () {
 	    var profilId = (0, _jquery2.default)('#students .flag').attr('id');

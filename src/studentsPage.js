@@ -87,6 +87,7 @@ function dispFeatures(){
   }
 }
 
+// au clique sur le symbole plus
 function clkOnIncreaseItem(){
   $('#students #increase').children().mousedown(function(){
     let profilId = $('#students .flag').attr('id');
@@ -102,6 +103,7 @@ function clkOnIncreaseItem(){
   });
 }
 
+// au clique sur le symbole moins
 function clkOnDecreaseItem(){
   $('#students #decrease').children().mousedown(function(){
     let profilId = $('#students .flag').attr('id');

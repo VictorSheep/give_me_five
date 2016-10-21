@@ -4,7 +4,7 @@ import {now} from './data';
 import {STUDENTS} from './data';
 import moment from 'moment';
 
-var rollEnd = null;
+var rollEnd = null; //objet(moment.js) correspondan à l'heure de fin de l'appel
 
 function init(){
   disp(STUDENTS);
@@ -75,7 +75,7 @@ function getRollEnd(){
       limit2  = moment(now);
 
   limit1 = moment(limit1.hour(13).minute(0).second(0));//Aujourd'hui à 13h00
-  limit2 = moment(limit2.hour(16).minute(36).second(0));//Aujourd'hui à 17h00
+  limit2 = moment(limit2.hour(17).minute(0).second(0));//Aujourd'hui à 17h00
 
   if(moment(rollMoment).isBefore(limit1))
   {
