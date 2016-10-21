@@ -49,4 +49,5 @@ let FEATURES = [
   new TablePassage()
 ];
 
-export{STUDENTS,BTNNAVS,FEATURES,now};
+export{STUDENTS,BTNNAVS,FEATURES,
+  now};

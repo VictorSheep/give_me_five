@@ -25481,12 +25481,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var rollEnd = null;
+
 	function init() {
 	  disp(_data.STUDENTS);
 	  dispDate();
 	  clkOnRadioButton(_data.STUDENTS);
-	  var rollEnd = clkOnValidRollButton();
-	  validTime(rollEnd);
+
+	  clkOnValidRollButton();
+	  validTime();
 	}
 
 	function disp(table) {
@@ -25521,8 +25524,8 @@
 
 	function clkOnValidRollButton() {
 	  (0, _jquery2.default)('#valid_roll').on('mousedown', function () {
-	    var rollEnd = getRollEnd();
-	    return rollEnd;
+	    getRollEnd();
+	    console.log('rollEnd (clkOnValidRollButton) = ' + rollEnd);
 	  });
 	}
 
@@ -25538,12 +25541,10 @@
 	function getRollEnd() {
 	  var rollMoment = (0, _moment2.default)(_data.now),
 	      limit1 = (0, _moment2.default)(_data.now),
-	      limit2 = (0, _moment2.default)(_data.now),
-	      rollEnd = null;
+	      limit2 = (0, _moment2.default)(_data.now);
 
-	  limit1 = (0, _moment2.default)(limit1.hour(12).minute(41).second(40)); //Aujourd'hui à 13h00
-	  limit2 = (0, _moment2.default)(limit2.hour(17).minute(0).second(0)); //Aujourd'hui à 17h00
-	  console.log('rollMoment = ' + rollMoment.format('LLL'));
+	  limit1 = (0, _moment2.default)(limit1.hour(13).minute(0).second(0)); //Aujourd'hui à 13h00
+	  limit2 = (0, _moment2.default)(limit2.hour(15).minute(7).second(0)); //Aujourd'hui à 17h00
 
 	  if ((0, _moment2.default)(rollMoment).isBefore(limit1)) {
 	    console.log('matin');
@@ -25552,22 +25553,23 @@
 	    console.log('aprèm');
 	    rollEnd = (0, _moment2.default)(limit2);
 	  }
-	  console.log('rollEnd    = ' + rollEnd.format('LLL'));
-	  return rollEnd;
+	  console.log('rollEnd (getRollEnd) = ' + rollEnd);
 	}
 
-	function validTime(rollEnd) {
-	  if (typeof rollEnd === 'undifined') {
-	    setInterval(function () {
-	      if ((0, _moment2.default)(_data.now).isSameOrAfter(rollEnd)) {
-	        console.log('Il est l\'heure !');
-	        for (var i = _data.STUDENTS.length - 1; i >= 0; i--) {
-	          var s = _data.STUDENTS[i];
-	          s.validRollState();
-	        }
+	function validTime() {
+
+	  setInterval(function () {
+	    console.log('rollEnd (validTime) = ' + rollEnd);
+	    console.log(_data.now + ' > ' + rollEnd + ' ?');
+	    console.log((0, _moment2.default)(_data.now).isSameOrAfter(rollEnd));
+	    if ((0, _moment2.default)(_data.now).isSameOrAfter(rollEnd)) {
+	      console.log('Il est l\'heure !');
+	      for (var i = _data.STUDENTS.length - 1; i >= 0; i--) {
+	        var s = _data.STUDENTS[i];
+	        s.validRollState();
 	      }
-	    }, 1000);
-	  }
+	    }
+	  }, 1000);
 	}
 
 	exports.init = init;

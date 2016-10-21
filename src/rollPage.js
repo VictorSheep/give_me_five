@@ -1,12 +1,17 @@
 import $ from 'jquery';
 import {now} from './data';
 import {STUDENTS} from './data';
+import moment from 'moment';
+
+var rollEnd = null;
 
 function init(){
   disp(STUDENTS);
-  clkOnRadioButton(STUDENTS);
   dispDate();
-  setInterval(validTime,1000);
+  clkOnRadioButton(STUDENTS);
+
+  clkOnValidRollButton();
+  validTime();
 }
 
 function disp(table){
@@ -39,6 +44,13 @@ function clkOnRadioButton(table){
   });
 }
 
+function clkOnValidRollButton(){
+  $('#valid_roll').on('mousedown',function(){
+    getRollEnd();
+    console.log('rollEnd (clkOnValidRollButton) = '+rollEnd);
+  });
+}
+
 function dispDate(){
   setTimeout(function(){
     $('#roll .date').text(now.format('LL'));
@@ -46,16 +58,43 @@ function dispDate(){
   },60000);
 }
 
+// check le moment de la validation de l'appel
+// et renvois l'heure de la fin (limite) de l'appel
+function getRollEnd(){
+  let rollMoment = moment(now),
+      limit1  = moment(now),
+      limit2  = moment(now);
+
+  limit1 = moment(limit1.hour(13).minute(0).second(0));//Aujourd'hui à 13h00
+  limit2 = moment(limit2.hour(15).minute(7).second(0));//Aujourd'hui à 17h00
+
+  if(moment(rollMoment).isBefore(limit1))
+  {
+    console.log('matin');
+    rollEnd = moment(limit1);
+  }
+  else if(moment(rollMoment).isBefore(limit2))
+  {
+    console.log('aprèm');
+    rollEnd = moment(limit2);
+  }
+  console.log('rollEnd (getRollEnd) = '+rollEnd);
+}
+
 function validTime(){
 
-  if( '13:00:00'==(now.format('LTS'))
-    ||'17:00:00'==(now.format('LTS'))){
-    console.log('Il est l\'heure !');
-    for (var i = STUDENTS.length - 1; i >= 0; i--) {
-      let s=STUDENTS[i];
-      s.validRollState();
-    }
-  }
+    setInterval(function(){
+      console.log('rollEnd (validTime) = '+rollEnd);
+      console.log(now+' > '+rollEnd +' ?');
+      console.log(moment(now).isSameOrAfter(rollEnd));
+      if(moment(now).isSameOrAfter(rollEnd)){
+        console.log('Il est l\'heure !');
+        for (let i = STUDENTS.length - 1; i >= 0; i--) {
+          let s=STUDENTS[i];
+          s.validRollState();
+        }
+      }
+    },1000);
 }
 
 export{init};

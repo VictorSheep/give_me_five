@@ -191,3 +191,13 @@ input[type=radio] {
 .radio-middle{
     margin: 0 29% !important;
 }
+#roll #valid_roll{
+  cursor: pointer;
+  width: 15%;
+  float: right;
+  text-align: center;
+  padding: 10px 15px 1px 15px;
+  border-radius: 5px;
+  background-color: #D35612;
+  color: white;
+}
