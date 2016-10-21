@@ -17,6 +17,9 @@ a:hover{
   z-index: -1;
   font-size: 10em !important;
 }
+.disp_none{
+  display: none;
+}
 
 /*divers*/
 .center{margin:auto auto;}
@@ -190,6 +193,13 @@ input[type=radio] {
 }
 .radio-middle{
     margin: 0 29% !important;
+}
+#roll .valid_col>p{
+  float: right;
+  color: #537BAA;
+  width: 15%;
+  text-align: center;
+  padding: 10px 15px 1px 15px;
 }
 #roll #valid_roll{
   cursor: pointer;

@@ -7,7 +7,7 @@ var rollEnd = null;
 
 function init(){
   disp(STUDENTS);
-  dispDate();
+  refreshDate();
   clkOnRadioButton(STUDENTS);
 
   clkOnValidRollButton();
@@ -16,7 +16,7 @@ function init(){
 
 function disp(table){
 
-  $('#roll .date').text(now.format('LL'));
+  dispDate();
 
   let $trStudent = $('#roll td:first').parent().detach(); // clone + remove
 
@@ -47,15 +47,23 @@ function clkOnRadioButton(table){
 function clkOnValidRollButton(){
   $('#valid_roll').on('mousedown',function(){
     getRollEnd();
-    console.log('rollEnd (clkOnValidRollButton) = '+rollEnd);
+    $('.valid_col p').removeClass();
   });
 }
 
 function dispDate(){
-  setTimeout(function(){
-    $('#roll .date').text(now.format('LL'));
-    dispDate();
-  },60000);
+  let midday  = moment(now.hour(13).minute(0).second(0));//Aujourd'hui à 13h00
+  let text    = now.format('LL');
+  if(moment(now).isBefore(midday)){
+    text += ' (matin)';
+  }else{      
+    text += ' (après-midi)';
+  }
+  $('#roll .date').text(text);
+}
+
+function refreshDate(){
+  setInterval(dispDate,6000);
 }
 
 // check le moment de la validation de l'appel
@@ -66,7 +74,7 @@ function getRollEnd(){
       limit2  = moment(now);
 
   limit1 = moment(limit1.hour(13).minute(0).second(0));//Aujourd'hui à 13h00
-  limit2 = moment(limit2.hour(15).minute(7).second(0));//Aujourd'hui à 17h00
+  limit2 = moment(limit2.hour(17).minute(0).second(0));//Aujourd'hui à 17h00
 
   if(moment(rollMoment).isBefore(limit1))
   {
@@ -75,24 +83,23 @@ function getRollEnd(){
   }
   else if(moment(rollMoment).isBefore(limit2))
   {
-    console.log('aprèm');
+    console.log('après midi');    
     rollEnd = moment(limit2);
   }
-  console.log('rollEnd (getRollEnd) = '+rollEnd);
 }
 
 function validTime(){
 
     setInterval(function(){
-      console.log('rollEnd (validTime) = '+rollEnd);
-      console.log(now+' > '+rollEnd +' ?');
-      console.log(moment(now).isSameOrAfter(rollEnd));
+      
       if(moment(now).isSameOrAfter(rollEnd)){
-        console.log('Il est l\'heure !');
         for (let i = STUDENTS.length - 1; i >= 0; i--) {
           let s=STUDENTS[i];
           s.validRollState();
         }
+        rollEnd = null;
+        $('.valid_col>p').addClass('disp_none');
+        $('input[type=radio]').prop('checked',false);
       }
     },1000);
 }

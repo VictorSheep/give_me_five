@@ -25485,7 +25485,7 @@
 
 	function init() {
 	  disp(_data.STUDENTS);
-	  dispDate();
+	  refreshDate();
 	  clkOnRadioButton(_data.STUDENTS);
 
 	  clkOnValidRollButton();
@@ -25494,7 +25494,7 @@
 
 	function disp(table) {
 
-	  (0, _jquery2.default)('#roll .date').text(_data.now.format('LL'));
+	  dispDate();
 
 	  var $trStudent = (0, _jquery2.default)('#roll td:first').parent().detach(); // clone + remove
 
@@ -25525,15 +25525,23 @@
 	function clkOnValidRollButton() {
 	  (0, _jquery2.default)('#valid_roll').on('mousedown', function () {
 	    getRollEnd();
-	    console.log('rollEnd (clkOnValidRollButton) = ' + rollEnd);
+	    (0, _jquery2.default)('.valid_col p').removeClass();
 	  });
 	}
 
 	function dispDate() {
-	  setTimeout(function () {
-	    (0, _jquery2.default)('#roll .date').text(_data.now.format('LL'));
-	    dispDate();
-	  }, 60000);
+	  var midday = (0, _moment2.default)(_data.now.hour(13).minute(0).second(0)); //Aujourd'hui à 13h00
+	  var text = _data.now.format('LL');
+	  if ((0, _moment2.default)(_data.now).isBefore(midday)) {
+	    text += ' (matin)';
+	  } else {
+	    text += ' (après-midi)';
+	  }
+	  (0, _jquery2.default)('#roll .date').text(text);
+	}
+
+	function refreshDate() {
+	  setInterval(dispDate, 6000);
 	}
 
 	// check le moment de la validation de l'appel
@@ -25544,30 +25552,29 @@
 	      limit2 = (0, _moment2.default)(_data.now);
 
 	  limit1 = (0, _moment2.default)(limit1.hour(13).minute(0).second(0)); //Aujourd'hui à 13h00
-	  limit2 = (0, _moment2.default)(limit2.hour(15).minute(7).second(0)); //Aujourd'hui à 17h00
+	  limit2 = (0, _moment2.default)(limit2.hour(17).minute(0).second(0)); //Aujourd'hui à 17h00
 
 	  if ((0, _moment2.default)(rollMoment).isBefore(limit1)) {
 	    console.log('matin');
 	    rollEnd = (0, _moment2.default)(limit1);
 	  } else if ((0, _moment2.default)(rollMoment).isBefore(limit2)) {
-	    console.log('aprèm');
+	    console.log('après midi');
 	    rollEnd = (0, _moment2.default)(limit2);
 	  }
-	  console.log('rollEnd (getRollEnd) = ' + rollEnd);
 	}
 
 	function validTime() {
 
 	  setInterval(function () {
-	    console.log('rollEnd (validTime) = ' + rollEnd);
-	    console.log(_data.now + ' > ' + rollEnd + ' ?');
-	    console.log((0, _moment2.default)(_data.now).isSameOrAfter(rollEnd));
+
 	    if ((0, _moment2.default)(_data.now).isSameOrAfter(rollEnd)) {
-	      console.log('Il est l\'heure !');
 	      for (var i = _data.STUDENTS.length - 1; i >= 0; i--) {
 	        var s = _data.STUDENTS[i];
 	        s.validRollState();
 	      }
+	      rollEnd = null;
+	      (0, _jquery2.default)('.valid_col>p').addClass('disp_none');
+	      (0, _jquery2.default)('input[type=radio]').prop('checked', false);
 	    }
 	  }, 1000);
 	}
