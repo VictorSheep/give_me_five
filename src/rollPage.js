@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import * as studentsPage from './studentsPage';
 import {now} from './data';
 import {STUDENTS} from './data';
 import moment from 'moment';
@@ -74,7 +75,7 @@ function getRollEnd(){
       limit2  = moment(now);
 
   limit1 = moment(limit1.hour(13).minute(0).second(0));//Aujourd'hui à 13h00
-  limit2 = moment(limit2.hour(17).minute(0).second(0));//Aujourd'hui à 17h00
+  limit2 = moment(limit2.hour(16).minute(36).second(0));//Aujourd'hui à 17h00
 
   if(moment(rollMoment).isBefore(limit1))
   {
@@ -96,10 +97,12 @@ function validTime(){
         for (let i = STUDENTS.length - 1; i >= 0; i--) {
           let s=STUDENTS[i];
           s.validRollState();
+          s.updateScore();
         }
         rollEnd = null;
         $('.valid_col>p').addClass('disp_none');
         $('input[type=radio]').prop('checked',false);
+        studentsPage.dispCardMin();
       }
     },1000);
 }

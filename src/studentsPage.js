@@ -15,7 +15,8 @@ function init(){
 
 function dispCardMin(){
 
-  let $divStudent = $('#students .profil_card_min:first').detach(); // clone + remove
+  let $divStudent = $('#students .profil_card_min:first').clone();
+  $('#students .profil_card_min').parent().empty();
 
   for (var i = 0; i < STUDENTS.length; i++) {
     let s = STUDENTS[i];
@@ -94,7 +95,9 @@ function clkOnIncreaseItem(){
     let f = FEATURES[featurID];
     f.addPoint(s);
     s.updateScore();
-    rankPage.init(STUDENTS);    
+    rankPage.init();
+    dispCardMin();
+
     affStudentDetail(profilId);
   });
 }
@@ -107,6 +110,8 @@ function clkOnDecreaseItem(){
     let f = FEATURES[featurID];
     f.removePoint(s);
     s.updateScore();
+    rankPage.init();
+    dispCardMin();
 
     affStudentDetail(profilId);
   });
@@ -148,4 +153,4 @@ function affStudentDetail(profilId){
 function endInit(){
   affStudentDetail(0);
 }
-export{init};
+export{init,dispCardMin};

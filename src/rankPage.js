@@ -1,8 +1,9 @@
 import $ from 'jquery';
+import {STUDENTS} from './data';
 import {compareNombres} from './additionalFunctions';
 
-function init(table){
-  let sortTable = sortStudents(table);
+function init(){
+  let sortTable = sortStudents(STUDENTS);
   disp(sortTable);
 }
 

@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import {BTNNAVS} from './data';
 
-function init(table){
-	disp(table);
+function init(){
+	disp(BTNNAVS);
   on_mousedown();
 }
 

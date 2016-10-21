@@ -10319,20 +10319,18 @@
 
 	var _data = __webpack_require__(4);
 
-	var data = _interopRequireWildcard(_data);
-
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function init() {
 	  // Attribution des id aux instances de Student
-	  for (var i = data.STUDENTS.length - 1; i >= 0; i--) {
-	    var s = data.STUDENTS[i];
+	  for (var i = _data.STUDENTS.length - 1; i >= 0; i--) {
+	    var s = _data.STUDENTS[i];
 	    s.init(i);
 	  }
-	  homePage.init(data.BTNNAVS);
+	  homePage.init();
 	  rollPage.init();
 	  studentsPage.init();
-	  rankPage.init(data.STUDENTS);
+	  rankPage.init();
 	  menu.init();
 	}
 
@@ -10357,8 +10355,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function init(table) {
-		disp(table);
+	function init() {
+		disp(_data.BTNNAVS);
 		on_mousedown();
 	}
 
@@ -25375,12 +25373,14 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _data = __webpack_require__(4);
+
 	var _additionalFunctions = __webpack_require__(121);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function init(table) {
-	  var sortTable = sortStudents(table);
+	function init() {
+	  var sortTable = sortStudents(_data.STUDENTS);
 	  disp(sortTable);
 	}
 
@@ -25473,11 +25473,17 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _studentsPage = __webpack_require__(124);
+
+	var studentsPage = _interopRequireWildcard(_studentsPage);
+
 	var _data = __webpack_require__(4);
 
 	var _moment = __webpack_require__(13);
 
 	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25552,7 +25558,7 @@
 	      limit2 = (0, _moment2.default)(_data.now);
 
 	  limit1 = (0, _moment2.default)(limit1.hour(13).minute(0).second(0)); //Aujourd'hui à 13h00
-	  limit2 = (0, _moment2.default)(limit2.hour(17).minute(0).second(0)); //Aujourd'hui à 17h00
+	  limit2 = (0, _moment2.default)(limit2.hour(16).minute(36).second(0)); //Aujourd'hui à 17h00
 
 	  if ((0, _moment2.default)(rollMoment).isBefore(limit1)) {
 	    console.log('matin');
@@ -25571,10 +25577,12 @@
 	      for (var i = _data.STUDENTS.length - 1; i >= 0; i--) {
 	        var s = _data.STUDENTS[i];
 	        s.validRollState();
+	        s.updateScore();
 	      }
 	      rollEnd = null;
 	      (0, _jquery2.default)('.valid_col>p').addClass('disp_none');
 	      (0, _jquery2.default)('input[type=radio]').prop('checked', false);
+	      studentsPage.dispCardMin();
 	    }
 	  }, 1000);
 	}
@@ -25645,7 +25653,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.init = undefined;
+	exports.dispCardMin = exports.init = undefined;
 
 	var _jquery = __webpack_require__(1);
 
@@ -25676,7 +25684,8 @@
 
 	function dispCardMin() {
 
-	  var $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').detach(); // clone + remove
+	  var $divStudent = (0, _jquery2.default)('#students .profil_card_min:first').clone();
+	  (0, _jquery2.default)('#students .profil_card_min').parent().empty();
 
 	  for (var i = 0; i < _data.STUDENTS.length; i++) {
 	    var s = _data.STUDENTS[i];
@@ -25751,7 +25760,9 @@
 	    var f = _data.FEATURES[featurID];
 	    f.addPoint(s);
 	    s.updateScore();
-	    rankPage.init(_data.STUDENTS);
+	    rankPage.init();
+	    dispCardMin();
+
 	    affStudentDetail(profilId);
 	  });
 	}
@@ -25764,6 +25775,8 @@
 	    var f = _data.FEATURES[featurID];
 	    f.removePoint(s);
 	    s.updateScore();
+	    rankPage.init();
+	    dispCardMin();
 
 	    affStudentDetail(profilId);
 	  });
@@ -25806,6 +25819,7 @@
 	  affStudentDetail(0);
 	}
 	exports.init = init;
+	exports.dispCardMin = dispCardMin;
 
 /***/ }
 /******/ ]);
